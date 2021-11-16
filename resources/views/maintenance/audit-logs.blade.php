@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('pagecss')
-<link href="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-<link href="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="{{env('app_url')}}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-<link href="{{env('app_url')}}/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 
-<link href="{{env('app_url')}}/assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
-<link href="{{env('app_url')}}/login/css/main1.css" rel="stylesheet" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/login/css/main1.css" rel="stylesheet" />
 
 <style type="text/css">
     label {
@@ -117,14 +117,14 @@
 @endsection
 
 @section('pagejs')
-<script src="{{env('app_url')}}/assets/global/scripts/datatable.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/pages/scripts/table-datatables-buttons.min.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/pages/scripts/table-datatables-buttons.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
 
-<script src="{{env('app_url')}}/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
         $(document).ready(function(){

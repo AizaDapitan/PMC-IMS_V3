@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('pagecss')
-<link href="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-<link href="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
 
 <style>
     .b-price-plan__item{
@@ -230,22 +230,22 @@
 @endsection
 
 @section('pagejs')
-<script src="{{env('app_url')}}/assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
 
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/amcharts/radar.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/amcharts/themes/patterns.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/amcharts/themes/chalk.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/ammap/ammap.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/ammap/maps/js/worldLow.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/amcharts/radar.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/amcharts/themes/patterns.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/amcharts/themes/chalk.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/ammap/ammap.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/ammap/maps/js/worldLow.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
 
-<script src="{{env('app_url')}}/assets/pages/scripts/dashboard.min.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/pages/scripts/dashboard.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 @endsection
 
 

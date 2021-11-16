@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('pagecss')
-<link href="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-<link href="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
 
-<link href="{{env('app_url')}}/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
-<link href="{{env('app_url')}}/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="{{env('APP_URL')}}/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 
 @endsection
 
@@ -75,12 +75,12 @@
 @endsection
 
 @section('pagejs')
-<script src="{{env('app_url')}}/assets/global/scripts/datatable.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
 
-<script src="{{env('app_url')}}/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
-<script src="{{env('app_url')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
 
 <script>
 

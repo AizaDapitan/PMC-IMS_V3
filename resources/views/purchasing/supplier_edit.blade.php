@@ -100,8 +100,8 @@
 @endsection
 
 @section('pagejs')
-<script type="text/javascript"src="{{env('app_url')}}/assets/global/plugins/select2/js/select2.full.min.js"></script>
-<script type="text/javascript"src="{{env('app_url')}}/assets/pages/scripts/components-select2.min.js"></script>
+<script type="text/javascript"src="{{env('APP_URL')}}/assets/global/plugins/select2/js/select2.full.min.js"></script>
+<script type="text/javascript"src="{{env('APP_URL')}}/assets/pages/scripts/components-select2.min.js"></script>
 
 <script type="text/javascript">
     $("#uploadFile").change(function(){
