@@ -125,6 +125,11 @@
                         <li>
                             <a href="{{ route('email-recipients.index') }}"><i class="fa fa-envelope"></i> Email Recipients</a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('roles.index') }}"><i class="fa fa-users"></i> Roles</a>
+                        </li>
+                        
                     </ul>
                 </li>
             @endif

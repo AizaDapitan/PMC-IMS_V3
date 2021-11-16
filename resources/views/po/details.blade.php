@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('pagecss')
-    <link href="{{ asset('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         #file_preview{
             padding: 10px;
@@ -384,10 +384,10 @@
 @endsection
 
 @section('pagejs')
-    <script type="text/javascript" src="{{ asset('assets/global/scripts/datatable.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/global/plugins/datatables/datatables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script type="text/javascript" src="{{env('app_url')}}/assets/global/scripts/datatable.js"></script>
+    <script type="text/javascript" src="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+    <script type="text/javascript" src="{{env('app_url')}}/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 
     <script type="text/javascript">
 

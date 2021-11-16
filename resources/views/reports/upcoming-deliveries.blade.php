@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('pagecss')
-    <link href="{{ asset('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.css rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('login/css/main1.css') }}" rel="stylesheet" />
+    <link href="{{env('app_url')}}/login/css/main1.css" rel="stylesheet" />
 
     <style type="text/css">
         td {
@@ -52,7 +52,7 @@
                                         <span class="caption-subject font-blue-hoki bold uppercase">Upcoming Deliveries</span>
                                     </div>
                                 </div>
-                                <center><img style="display:none;" id='loader' src="{{ asset('assets/layouts/layout3/img/loading.gif') }}"></center>
+                                <center><img style="display:none;" id='loader' src="{{env('app_url')}}/assets/layouts/layout3/img/loading.gif') }}"></center>
 
                                 <div class="portlet-body">
                                     <div id="data_tbl"></div>
@@ -73,12 +73,12 @@
 @endsection
 
 @section('pagejs')
-    <script src="{{ asset('assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/pages/scripts/table-datatables-buttons.min.js') }}" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/pages/scripts/table-datatables-buttons.min.js" type="text/javascript"></script>
 
-    <script src="{{ asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(document).ready(function(){

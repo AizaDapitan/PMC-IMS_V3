@@ -178,9 +178,12 @@ Route::group(['middleware' => ['authenticated']], function () {
 	Route::get('/export/overdue-deliveries/{from}/{to}','ExportController@overdue_deliveries')->name('export.overdue-deliveries');
 	Route::get('/export/all-overdue-deliveries','ExportController@overdue_deliveries')->name('export.overdue-deliveries-all');
 	
-	Route::group(['prefix' => 'ims'], function(){
+	Route::group(['prefix' => 'ims'], function()
+	{
 
 		Route::resource('/email-recipients', 'EmailRecipientsController');
+
+		Route::resource('/roles', 'RoleController');
 
 	});
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('pagecss')
-    <link href="{{ asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
     <style>
         .highcharts-figure, .highcharts-data-table table {
             min-width: 320px; 
@@ -105,12 +105,12 @@
 @endsection
 
 @section('pagejs')
-    <script src="{{ asset('assets/global/plugins/highcharts/highcharts.js') }}"></script>
-    <script src="{{ asset('assets/global/plugins/highcharts/exporting.js') }}"></script>
-    <script src="{{ asset('assets/global/plugins/highcharts/export-data.js') }}"></script>
-    <script src="{{ asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/pages/scripts/components-date-time-pickers.min.js') }}" type="text/javascript"></script>
-    {{-- <script src="{{ asset('assets/scripts/home.js') }}"></script> --}}
+    <script src="{{env('app_url')}}/assets/global/plugins/highcharts/highcharts.js"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/highcharts/exporting.js"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/highcharts/export-data.js"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+    {{-- <script src="{{env('app_url')}}/assets/scripts/home.js"></script> --}}
 
     <script>
         // Build the chart

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('pagecss')
-    <link href="{{ asset('assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/pages/css/profile.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
                 <div class="portlet light profile-sidebar-portlet bordered">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="{{ asset('images/user.png') }}" class="img-responsive" alt=""> </div>
+                        <img src="{{env('app_url')}}/images/user.png') }}" class="img-responsive" alt=""> </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
@@ -117,7 +117,7 @@
 @endsection
 
 @section('pagejs')
-    <script src="{{ asset('assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
 @endsection

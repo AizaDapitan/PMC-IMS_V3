@@ -31,7 +31,7 @@ class LoginController extends Controller
 
     	if(Auth::attempt($user_data))
     	{	
-            file_get_contents('http://172.16.20.27/ims_v3/api/delete.php');
+            //file_get_contents('http://172.16.20.27/ims_v3/api/delete.php');
             Session::put('user',$request->domainAccount);
     		return redirect('/ims/dashboard');
     	}

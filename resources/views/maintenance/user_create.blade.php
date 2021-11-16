@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('pagecss')
-    <link rel="stylesheet" href="{{ asset('assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="{{env('app_url')}}/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
 
-    <link href="{{ asset('assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{env('app_url')}}/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
     <style>
         .bootstrap-tagsinput {
             position: relative;
@@ -121,11 +121,11 @@
 @endsection
 
 @section('pagejs')
-    <script src="{{ asset('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/pages/scripts/components-select2.min.js') }}" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="{{env('app_url')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
 
-    <script src="{{ asset('assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script> 
-    <script src="{{ asset('assets/global/plugins/typeahead.js/typeahead.bundle.min.js') }}"></script>
+    <script src="{{env('app_url')}}/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script> 
+    <script src="{{env('app_url')}}/assets/global/plugins/typeahead.js/typeahead.bundle.min.js"></script>
 
     <script>       
         $(document).ready(function(){
