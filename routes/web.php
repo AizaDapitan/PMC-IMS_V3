@@ -180,28 +180,24 @@ Route::group(['middleware' => ['authenticated']], function () {
 	
 	Route::group(['prefix' => 'ims'], function()
 	{
-
 		Route::resource('/email-recipients', 'EmailRecipientsController');
-
 		Route::resource('/roles', 'RoleController');
-
+		Route::resource('/permissions', 'PermissionController');
 	});
 
+	Route::group(['prefix' => 'roleaccessrights'], function () {
+	 	Route::get('/ims', 'RoleRightController@index')->name('maintenance.roleaccessrights');
+	 	Route::post('/ims/store', 'RoleRightController@store')->name('maintenance.roleaccessrights.store');
+	 	Route::get('/ims/store', 'RoleRightController@store')->name('maintenance.roleaccessrights.store');
+	});   	
+
+	Route::group(['prefix' => 'useraccessrights'], function () {
+		Route::get('/ims', 'UserRightController@index')->name('maintenance.useraccessrights');
+		Route::post('/ims/store', 'UserRightController@store')->name('maintenance.useraccessrights.store');
+		Route::get('/ims/store', 'UserRightController@store')->name('maintenance.useraccessrights.store');
+   });   	
+
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Maintenance Routes
 
@@ -210,12 +206,8 @@ Route::post('/user/add', 'MaintenanceController@addUser');
 Route::post('/user/edit', 'MaintenanceController@editUser');
 Route::post('/deleteUser','MaintenanceController@destroyUser');
 
-
-
-
 Route::post('/drr/copyFile','ProcessesController@drr_copy_file');
 Route::post('/logistics/copyFile','ProcessesController@logistics_copy_file');
-
 
 // Ajax Routes
 Route::get('/remarks/list/{remarks}','RemarksController@list');

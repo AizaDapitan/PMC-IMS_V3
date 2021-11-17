@@ -113,8 +113,7 @@
                     </li>
                 </ul>
             </li>
-
-            @if(auth()->user()->role == 'ict')
+            
                 <li class="dropdown more-dropdown">
                     <a href="javascript:;" class="text-uppercase">
                         <i class="fa fa-cogs"></i> Settings</a>
@@ -129,10 +128,22 @@
                         <li>
                             <a href="{{ route('roles.index') }}"><i class="fa fa-users"></i> Roles</a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('permissions.index') }}"><i class="fa fa-users"></i> Permissions</a>
+                        </li>        
+                        
+                        <li>
+                            <a href="{{ route('maintenance.roleaccessrights') }}"><i class="fa fa-users"></i> Role Access Rights</a>
+                        </li>         
+                        
+                        <li>
+                            <a href="{{ route('maintenance.useraccessrights') }}"><i class="fa fa-users"></i> User Access Rights</a>
+                        </li>                         
                         
                     </ul>
                 </li>
-            @endif
+            
         </ul>
 
         <div class="topbar-actions">
