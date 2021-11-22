@@ -8,7 +8,7 @@
     <div class="nav-collapse collapse navbar-collapse navbar-responsive-collapse navbar navbar-fixed-top">
         <ul class="nav navbar-nav">
             <li class="">
-                <a style="background: #00539CFF;color: #FFD662FF;" href="/ims/dashboard" class="text-uppercase">IMS v3 </a>
+                <a style="background: #00539CFF;color: #FFD662FF;" href="{{ route('ims.dashboard') }}" class="text-uppercase">IMS v3 </a>
             </li>
             <!-- active open selected -->
             <li class="dropdown dropdown-fw dropdown-fw-disabled">
@@ -113,7 +113,8 @@
                     </li>
                 </ul>
             </li>
-            
+
+            @if(auth()->user()->role == 'ict')
                 <li class="dropdown more-dropdown">
                     <a href="javascript:;" class="text-uppercase">
                         <i class="fa fa-cogs"></i> Settings</a>
@@ -139,11 +140,14 @@
                         
                         <li>
                             <a href="{{ route('maintenance.useraccessrights') }}"><i class="fa fa-users"></i> User Access Rights</a>
-                        </li>                         
-                        
+                        </li>               
+
+                        <li>
+                            <a href="{{ route('applications.index') }}"><i class="fa fa-users"></i> Applications</a>
+                        </li>                        
                     </ul>
                 </li>
-            
+            @endif
         </ul>
 
         <div class="topbar-actions">

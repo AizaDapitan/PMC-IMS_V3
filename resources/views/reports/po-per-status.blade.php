@@ -13,7 +13,8 @@
         <h1>PO Status</h1>
         <ol class="breadcrumb">
             <li>
-                <a href="#">Dashboard</a>
+                <!-- <a href="/dashboard">Dashboard</a> -->
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
                 <a href="#">Reports</a>
@@ -33,10 +34,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input style="width: 100%;" name="from" id="from" class="form-control form-control-inline date-picker" type="text" data-date-format="yyyy-mm-dd" data-date-end-date="+0d"/ value="{{ app('request')->input('from') }}" placeholder="From (optional)">
+                    <input style="width: 100%;" name="from" id="from" class="form-control form-control-inline date-picker" type="text" data-date-format="yyyy-mm-dd" data-date-end-date="+0d"/ value="{{ app('request')->input('from') }}" placeholder="Date From">
                 </div>
                 <div class="form-group">
-                    <input style="width: 100%;" name="to" id="to" class="form-control form-control-inline date-picker" type="text" data-date-format="yyyy-mm-dd"  value="{{ app('request')->input('to') }}" placeholder="To (optional)" />
+                    <input style="width: 100%;" name="to" id="to" class="form-control form-control-inline date-picker" type="text" data-date-format="yyyy-mm-dd"  value="{{ app('request')->input('to') }}" placeholder="Date To" />
                 </div>
                 <button type="submit" class="btn btn-primary">Filter</button>
                 <a href="{{ route('po.status') }}" class="btn default">Reset</a>

@@ -22,7 +22,8 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <a href="/dashboard">Dashboard</a>
+                <!-- <a href="/dashboard">Dashboard</a> -->
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li class="active">PO Completion</li>
         </ol>

@@ -183,19 +183,27 @@ Route::group(['middleware' => ['authenticated']], function () {
 		Route::resource('/email-recipients', 'EmailRecipientsController');
 		Route::resource('/roles', 'RoleController');
 		Route::resource('/permissions', 'PermissionController');
+
+		Route::resource('/applications', 'ApplicationController');
+
+		Route::get('create_indexing', 'ApplicationController@create_indexing')->name('applications.create_indexing');
+		Route::get('systemUp', 'ApplicationController@systemUp')->name('applications.systemUp');
+		Route::get('systemDown', 'ApplicationController@systemDown')->name('applications.systemDown');
 	});
 
+	//Role Access right routes
 	Route::group(['prefix' => 'roleaccessrights'], function () {
 	 	Route::get('/ims', 'RoleRightController@index')->name('maintenance.roleaccessrights');
 	 	Route::post('/ims/store', 'RoleRightController@store')->name('maintenance.roleaccessrights.store');
 	 	Route::get('/ims/store', 'RoleRightController@store')->name('maintenance.roleaccessrights.store');
 	});   	
 
+	//User Access right routes
 	Route::group(['prefix' => 'useraccessrights'], function () {
 		Route::get('/ims', 'UserRightController@index')->name('maintenance.useraccessrights');
 		Route::post('/ims/store', 'UserRightController@store')->name('maintenance.useraccessrights.store');
 		Route::get('/ims/store', 'UserRightController@store')->name('maintenance.useraccessrights.store');
-   });   	
+   });
 
 });
 

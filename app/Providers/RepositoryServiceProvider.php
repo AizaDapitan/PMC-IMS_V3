@@ -55,6 +55,16 @@ class RepositoryServiceProvider extends ServiceProvider
                 'App\User'
             ],
         ),        
+
+        // applications
+        array(
+            'interface' => 'App\Repositories\Interfaces\ApplicationRepositoryInterface',
+            'repository' => 'App\Repositories\ApplicationRepository',
+            'service' => 'App\Services\ApplicationService',
+            'model' => [
+                'App\Application',
+            ],
+        ),            
  
     );
     public function register()

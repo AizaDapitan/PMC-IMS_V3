@@ -12,7 +12,7 @@
 <div class="page-content">
     <!-- BEGIN BREADCRUMBS -->
     <div class="breadcrumbs">
-        <h1>Update Recipient</h1>
+        <h1>Create Scheduled Shutdown</h1>
         <ol class="breadcrumb">
             <li>
                 <!-- <a href="/dashboard">Dashboard</a> -->
@@ -21,29 +21,35 @@
             <li>
                 <a href="javascript:;">Settings</a>
             </li>
-            <li class="active">Email Recipients</li>
+            <li class="active">Scheduled Shutdown</li>
         </ol>
     </div>
 
     <div class="row">
         <div class="col-md-12">
         
-            <form class="col-md-4 col-md-offset-4" style="margin-top: 20px;" method="POST" 
-                action="{{ route('email-recipients.update', $recipient->id) }}">
-                @csrf
-                @method('PUT')
+            <form class="col-md-4 col-md-offset-4" style="margin-top: 20px;" method="POST" action="{{ route('applications.store') }}">
+                @csrf          
 
                 <div class="form-group">
-                    <label> Name </label>
-                    <input type="text" name="name" class="form-control" value="{{ $recipient->name }}">
+                    <label>Date <span class="required" aria-required="true"> * </span></label>
+                    <div class="input-group input-medium date date-picker" data-date="{{ today() }}" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                        <input required type="date" name="scheduled_date" id="scheduled_date" class="form-control">
+                    </div>                      
                 </div>
 
                 <div class="form-group">
-                    <label> Email </label>
-                    <input type="email" name="email" class="form-control" value="{{ $recipient->email }}">
-                </div>                
+                    <label>Time <span class="required" aria-required="true"> * </span></label>
+                    <input required type="time" name="scheduled_time" class="form-control" id="scheduled_time">
+                </div>
 
-                <button class="btn btn-primary pull-right"> Update </button>
+                <div class="form-group">
+                    <label>Reason <span class="required" aria-required="true"> * </span></label>
+                    <input type="text" placeholder="Reason" name="reason" id="reason" class="form-control" required maxlength="50" />
+                </div>
+                
+                <a href="{{ route('applications.index') }}" class="btn btn-primary pull-left">Back </a>
+                <button class="btn btn-primary pull-right"> Create </button>
 
             </form>
 
@@ -57,5 +63,5 @@
 <script src="{{env('APP_URL')}}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 <script src="{{env('APP_URL')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
 <script src="{{env('APP_URL')}}/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
-<script src="{{env('APP_URL')}}/assets/pages/scripts/components-select2.min.jsS" type="text/javascript"></script>
+<script src="{{env('APP_URL')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
 @endsection

@@ -12,7 +12,7 @@
 <div class="page-content">
     <!-- BEGIN BREADCRUMBS -->
     <div class="breadcrumbs">
-        <h1>Update Recipient</h1>
+        <h1>Update Scheduled Shutdown</h1>
         <ol class="breadcrumb">
             <li>
                 <!-- <a href="/dashboard">Dashboard</a> -->
@@ -21,7 +21,7 @@
             <li>
                 <a href="javascript:;">Settings</a>
             </li>
-            <li class="active">Email Recipients</li>
+            <li class="active">Scheduled Shutdown</li>
         </ol>
     </div>
 
@@ -29,20 +29,32 @@
         <div class="col-md-12">
         
             <form class="col-md-4 col-md-offset-4" style="margin-top: 20px;" method="POST" 
-                action="{{ route('email-recipients.update', $recipient->id) }}">
+                action="{{ route('applications.update', $application->id) }}">
                 @csrf
-                @method('PUT')
+                @method('PUT')              
 
                 <div class="form-group">
-                    <label> Name </label>
-                    <input type="text" name="name" class="form-control" value="{{ $recipient->name }}">
+                    <label>Date <span class="required" aria-required="true"> * </span></label>
+                    <div class="input-group input-medium date date-picker" data-date="{{ today() }}" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+                        <input required type="date" name="scheduled_date" id="scheduled_date" class="form-control" value="{{$application->scheduled_date}}"/>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label> Email </label>
-                    <input type="email" name="email" class="form-control" value="{{ $recipient->email }}">
+                    <label>Time <span class="required" aria-required="true"> * </span></label>
+                    <?php
+                        $schedule_time = $application['scheduled_time'];
+                        $schedule_time = str_replace(':00.0000000','',$schedule_time);
+                    ?>
+                    <input required type="time" class="form-control" name="scheduled_time" id="scheduled_time" value="{{$schedule_time}}" />
                 </div>                
 
+                <div class="form-group">
+                    <label>Reason <span class="required" aria-required="true"> * </span></label>
+                    <input type="text" class="form-control" name="reason" id="reason" value="{{$application->reason}}" required maxlength="50"/>
+                </div>                
+
+                <a href="{{ route('applications.index') }}" class="btn btn-primary pull-left">Back </a>
                 <button class="btn btn-primary pull-right"> Update </button>
 
             </form>

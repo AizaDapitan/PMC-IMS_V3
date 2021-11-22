@@ -15,7 +15,8 @@
         <h1>Update Permission</h1>
         <ol class="breadcrumb">
             <li>
-                <a href="/dashboard">Dashboard</a>
+                <!-- <a href="/dashboard">Dashboard</a> -->
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
                 <a href="javascript:;">Settings</a>
@@ -49,7 +50,7 @@
 
                 <div class="form-group">
                     <label>Description <span class="required" aria-required="true"> * </span></label>
-                    <input type="description" name="description" class="form-control" value="{{ $permission->description }}" required maxlength="50">
+                    <input type="description" name="description" class="form-control" value="{{ $permission->description }}" required maxlength="50" placeholder="Description">
                 </div>                
 
                 <a href="{{ route('permissions.index') }}" class="btn btn-primary pull-left">Back </a>

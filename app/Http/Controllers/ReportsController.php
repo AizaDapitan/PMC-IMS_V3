@@ -179,7 +179,9 @@ class ReportsController extends Controller
     {
         $collection = PaymentSchedule::where('isPaid',0)->whereDate('paymentDate','<',Carbon::today())->orderBy('paymentDate','desc')->paginate(15);
 
-        return view('reports.overdue_payables',compact('collection','param'));
+        return view('reports.overdue_payables',compact('collection'));
+
+        //return view('reports.overdue_payables',compact('collection','param'));
     }
 //
 }

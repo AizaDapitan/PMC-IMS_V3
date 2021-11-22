@@ -42,7 +42,8 @@
     <div class="breadcrumbs">
         <ol class="breadcrumb">
             <li>
-                <a href="/dashboard">Dashboard</a>
+                <!-- <a href="/dashboard">Dashboard</a> -->
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
                 <a href="/ims/purchasing">Purchasing</a>

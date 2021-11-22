@@ -13,7 +13,8 @@
         <h1>Overdue Deliveries <small>per waybill</small></h1>
         <ol class="breadcrumb">
             <li>
-                <a href="#">Dashboard</a>
+                <!-- <a href="/dashboard">Dashboard</a> -->
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
                 <a href="#">Reports</a>
@@ -27,10 +28,10 @@
         <div class="col-md-12 well">
             <form autocomplete="off" id="form" class="form-inline">
                 <div class="form-group">
-                    <input style="width: 100%;" name="from" id="from" class="form-control form-control-inline date-picker" type="text" data-date-format="mm-dd-yyyy" value="{{ app('request')->input('from') }}" />
+                    <input style="width: 100%;" name="from" id="from" class="form-control form-control-inline date-picker" type="text" data-date-format="mm-dd-yyyy" value="{{ app('request')->input('from') }}" placeholder="Date From" />
                 </div>
                 <div class="form-group">
-                    <input style="width: 100%;" name="to" id="to" class="form-control form-control-inline date-picker" type="text" data-date-format="mm-dd-yyyy" value="{{ app('request')->input('to') }}" />
+                    <input style="width: 100%;" name="to" id="to" class="form-control form-control-inline date-picker" type="text" data-date-format="mm-dd-yyyy" value="{{ app('request')->input('to') }}" placeholder="Date To"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Filter</button>
                 <a href="{{ route('delivery.status.report') }}" class="btn default">Reset</a>

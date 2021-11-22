@@ -13,7 +13,8 @@
         <h1>Users</h1>
         <ol class="breadcrumb">
             <li>
-                <a href="/dashboard">Dashboard</a>
+                <!-- <a href="/dashboard">Dashboard</a> -->
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
                 <a href="javascript:;">Settings</a>

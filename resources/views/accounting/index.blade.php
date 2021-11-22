@@ -9,6 +9,20 @@
 
 @section('content')
 <div class="page-content">
+
+    <!-- BEGIN BREADCRUMBS -->
+    <div class="breadcrumbs">
+        <ol class="breadcrumb">
+            <li>
+                <!-- <a href="/dashboard">Dashboard</a> -->
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
+            </li>
+
+            <li class="active">Payments</li>
+        </ol>
+    </div>
+    <!-- END BREADCRUMBS -->
+
     <div class="row">
         <div class="col-md-9 well">
             <form autocomplete="off" id="form" class="form-inline">

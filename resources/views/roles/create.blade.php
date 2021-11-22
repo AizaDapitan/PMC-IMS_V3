@@ -15,7 +15,8 @@
         <h1>Create Role</h1>
         <ol class="breadcrumb">
             <li>
-                <a href="/dashboard">Dashboard</a>
+                <!-- <a href="/dashboard">Dashboard</a> -->
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
                 <a href="javascript:;">Settings</a>
@@ -37,12 +38,12 @@
 
                 <div class="form-group">
                     <label>Name <span class="required" aria-required="true"> * </span></label>
-                    <input type="text" name="name" class="form-control" required maxlength="30">
+                    <input type="text" name="name" class="form-control" required maxlength="30" placeholder="Name">
                 </div>
 
                 <div class="form-group">
                     <label>Description <span class="required" aria-required="true"> * </span></label>
-                    <input type="description" name="description" class="form-control" required maxlength="50">
+                    <input type="description" name="description" class="form-control" required maxlength="50" placeholder="Description">
                 </div>
 
                 <a href="{{ route('roles.index') }}" class="btn btn-primary pull-left">Back </a>

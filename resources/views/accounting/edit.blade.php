@@ -12,7 +12,8 @@
         <h1><i class="fa fa-money"></i> Update Payment Schedule</h1>
         <ol class="breadcrumb">
             <li>
-                <a href="/dashboard">Dashboard</a>
+                <!-- <a href="/dashboard">Dashboard</a> -->
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
                 <a href="/ims/logistics">Logistics</a>
