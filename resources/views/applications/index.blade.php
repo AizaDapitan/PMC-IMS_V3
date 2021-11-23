@@ -38,7 +38,7 @@
                     </div>
                     
                     @if($create)
-                        <a href="{{ route('applications.create') }}" class="btn btn-info pull-right">Create a Scheduled Shutdown</a>
+                        <a href="{{ route('maintenance.application.create') }}" class="btn btn-info pull-right">Create a Scheduled Shutdown</a>
                     @else
                         <button disabled class="btn btn-info pull-right">Create a Scheduled Shutdown</button>
                     @endif 
@@ -50,13 +50,13 @@
                     <div class="row">
                         <div class="col-md-12" style="direction:rtl;">
                             <div class="btn-group">
-                                <a onclick="return confirm('Are you sure you want to run reindexing?')" href="{{ route('applications.create_indexing') }}" class="btn sbold green"> Reindex Application Database</a>                                                    
+                                <a onclick="return confirm('Are you sure you want to run reindexing?')" href="{{ route('maintenance.application.create_indexing') }}" class="btn sbold green"> Reindex Application Database</a>                                                    
                             </div>
                             <div class="btn-group">
-                                <a onclick="return confirm('Are you sure you want to start application?')" href="{{ route('applications.systemUp') }}" class="btn sbold blue"> Start</a>                                                    
+                                <a onclick="return confirm('Are you sure you want to start application?')" href="{{ route('maintenance.application.systemUp') }}" class="btn sbold blue"> Start</a>                                                    
                             </div>
                             <div class="btn-group">
-                                <a onclick="return confirm('Are you sure you want to stop application?')" href="{{ route('applications.systemDown') }}" class="btn sbold red"> Stop</a>                                                    
+                                <a onclick="return confirm('Are you sure you want to stop application?')" href="{{ route('maintenance.application.systemDown') }}" class="btn sbold red"> Stop</a>                                                    
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                                 <td> {{$application['reason']}} </td>                                
                                 <td> 
                                     @if($edit)
-                                        <a href="{{ route('applications.edit', $application->id) }}" class="btn btn-primary"> Edit </a>
+                                        <a href="{{ route('maintenance.application.edit', $application->id) }}" class="btn btn-primary"> Edit </a>
                                     @else
                                         <button disabled class="btn btn-primary">Edit </button>
                                     @endif            
@@ -122,7 +122,7 @@
     
     <div class="modal fade" id="remove{{ $application['id'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{ route('applications.destroy', $application['id']) }}" method="POST">
+            <form action="{{ route('maintenance.application.destroy', $application['id']) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="modal-content">
@@ -162,7 +162,7 @@
 
           function systemDown(id) {
           $.ajax({
-              url: '{!! route('applications.systemDown') !!}',
+              url: '{!! route('maintenance.application.systemDown') !!}',
               type: 'POST',
               async: false,
               success: function(response) {

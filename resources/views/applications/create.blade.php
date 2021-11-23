@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-md-12">
         
-            <form class="col-md-4 col-md-offset-4" style="margin-top: 20px;" method="POST" action="{{ route('applications.store') }}">
+            <form class="col-md-4 col-md-offset-4" style="margin-top: 20px;" method="POST" action="{{ route('maintenance.application.store') }}">
                 @csrf          
 
                 <div class="form-group">
@@ -48,7 +48,7 @@
                     <input type="text" placeholder="Reason" name="reason" id="reason" class="form-control" required maxlength="50" />
                 </div>
                 
-                <a href="{{ route('applications.index') }}" class="btn btn-primary pull-left">Back </a>
+                <a href="{{ route('maintenance.application.index') }}" class="btn btn-primary pull-left">Back </a>
                 <button class="btn btn-primary pull-right"> Create </button>
 
             </form>

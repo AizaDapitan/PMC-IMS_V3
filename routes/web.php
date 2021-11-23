@@ -7,10 +7,13 @@ Route::get('/ims/dashboard', 'ProcessesController@dashboard')->name('ims.dashboa
 Route::get('/ims/dashboard2', 'ProcessesController@dashboard2');
 
 //Route::view('/ims/login','auth.loginv2');
-Route::view('/ims/login','auth.login');
+Route::view('/ims/login','auth.login')->name('auth.login');
 Route::get('/ims/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::post('/password/change', 'MaintenanceController@passwordChange');
+
+Route::get('adminlogin/admin', 'Auth\LoginController@adminLogin')->name('login.adminLogin'); // login
+Route::post('adminsubmit/admin', 'Auth\LoginController@adminSubmit')->name('login.adminsubmit'); // login submit
 ######################################################################################
 
 Route::group(['middleware' => ['authenticated']], function () {
@@ -150,12 +153,13 @@ Route::group(['middleware' => ['authenticated']], function () {
 // Maintenance Routes
 	Route::get('/ims/settings/users','MaintenanceController@user_index')->name('users.index');
 	Route::get('/ims/settings/users/create','MaintenanceController@user_create')->name('user.create');
+	Route::get('/ims/settings/users/{id}/edit','MaintenanceController@user_edit')->name('user.edit');
 	Route::post('/ims/settings/user-store','MaintenanceController@user_store')->name('user.store');
 	Route::get('/ims/user/profile/{id}','MaintenanceController@profile')->name('user.profile');
 	Route::post('/ims/user/change-password','MaintenanceController@change_password')->name('user.password-update');
 
 	// Route::post('/user/edit', 'MaintenanceController@editUser');
-	// Route::post('/deleteUser','MaintenanceController@destroyUser');
+	Route::post('/deleteUser','MaintenanceController@destroyUser');
 
 	// Route::get('/ims/maintenance/logs', 'MaintenanceController@logs')->middleware('authenticated');
 	// Route::get('/filter/logs','MaintenanceController@filterLogs')->name('post');
@@ -184,13 +188,28 @@ Route::group(['middleware' => ['authenticated']], function () {
 		Route::resource('/roles', 'RoleController');
 		Route::resource('/permissions', 'PermissionController');
 
-		Route::resource('/applications', 'ApplicationController');
+		// Route::resource('/applications', 'ApplicationController');
 
-		Route::get('create_indexing', 'ApplicationController@create_indexing')->name('applications.create_indexing');
-		Route::get('systemUp', 'ApplicationController@systemUp')->name('applications.systemUp');
-		Route::get('systemDown', 'ApplicationController@systemDown')->name('applications.systemDown');
+		// Route::get('create_indexing', 'ApplicationController@create_indexing')->name('applications.create_indexing');
+		// Route::get('systemUp', 'ApplicationController@systemUp')->name('applications.systemUp');
+		// Route::get('systemDown', 'ApplicationController@systemDown')->name('applications.systemDown');
 	});
 
+        // Application routes
+        Route::group(['prefix' => 'ims/application/maintenance'], function () {
+            Route::get('/', 'ApplicationController@index')->name('maintenance.application.index');
+            Route::get('/create', 'ApplicationController@create')->name('maintenance.application.create');
+            Route::get('{id}/edit', 'ApplicationController@edit')->name('maintenance.application.edit');
+            Route::post('/store', 'ApplicationController@store')->name('maintenance.application.store');
+            Route::put('{id}/update', 'ApplicationController@update')->name('maintenance.application.update');
+
+            Route::post('/application-maintenance', 'ApplicationController@updateApplication')->name('application.update');
+            Route::delete('{id}/destroy', 'ApplicationController@destroy')->name('maintenance.application.destroy');
+
+            Route::get('systemDown', 'ApplicationController@systemDown')->name('maintenance.application.systemDown');
+            Route::get('systemUp', 'ApplicationController@systemUp')->name('maintenance.application.systemUp');
+            Route::get('create_indexing', 'ApplicationController@create_indexing')->name('maintenance.application.create_indexing');
+        });
 	//Role Access right routes
 	Route::group(['prefix' => 'roleaccessrights'], function () {
 	 	Route::get('/ims', 'RoleRightController@index')->name('maintenance.roleaccessrights');

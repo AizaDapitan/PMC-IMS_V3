@@ -80,7 +80,7 @@ class ApplicationController extends Controller
             'reason' => $request->reason
         ]);
 
-        return redirect('/ims/applications')->with('success', 'Scheduled Maintenance has been updated successfull!');
+        return redirect()->route('maintenance.application.index')->with('success', 'Scheduled Maintenance has been updated successfull!');
 
 	}
 
@@ -95,18 +95,18 @@ class ApplicationController extends Controller
 
         if ($application) 
         {
-            return redirect('/ims/applications')->with('success', 'Reindex Application Database Successful!');            
+            return redirect()->route('maintenance.application.index')->with('success', 'Reindex Application Database Successful!');            
         } 
         else 
         {
-            return redirect('/ims/applications')->with('errorMesssage', 'Reindex Application Database Failed.');
+            return redirect()->route('maintenance.application.index')->with('errorMesssage', 'Reindex Application Database Failed.');
         }
     }
     
     public function systemUp()
     {
         Artisan::call('up');
-        return redirect('/ims/applications')->with('success', 'System back Online!'); 
+        return redirect()->route('maintenance.application.index')->with('success', 'System back Online!'); 
     }    
 
     public function systemDown()

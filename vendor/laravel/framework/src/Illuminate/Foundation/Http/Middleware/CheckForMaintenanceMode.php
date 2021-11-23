@@ -21,8 +21,10 @@ class CheckForMaintenanceMode
      *
      * @var array
      */
-    protected $except = [];
-
+    protected $except = [
+        'adminlogin',
+        'adminsubmit/*'
+    ];
     /**
      * Create a new middleware instance.
      *
@@ -45,16 +47,23 @@ class CheckForMaintenanceMode
      */
     public function handle($request, Closure $next)
     {
-        if ($this->app->isDownForMaintenance()) {
-            $data = json_decode(file_get_contents($this->app->storagePath().'/framework/down'), true);
+        // if ($this->app->isDownForMaintenance()) {
+        //     $data = json_decode(file_get_contents($this->app->storagePath().'/framework/down'), true);
 
-            if (isset($data['allowed']) && IpUtils::checkIp($request->ip(), (array) $data['allowed'])) {
-                return $next($request);
-            }
+        //     if (isset($data['allowed']) && IpUtils::checkIp($request->ip(), (array) $data['allowed'])) {
+        //         return $next($request);
+        //     }
 
-            if ($this->inExceptArray($request)) {
-                return $next($request);
-            }
+        //     if ($this->inExceptArray($request)) {
+        //         return $next($request);
+        //     }
+
+        //     throw new MaintenanceModeException($data['time'], $data['retry'], $data['message']);
+        // }
+
+        // return $next($request);
+        if ($this->app->isDownForMaintenance() && !$this->isBackendRequest($request)) {
+            $data = json_decode(file_get_contents($this->app->storagePath() . '/framework/down'), true);
 
             throw new MaintenanceModeException($data['time'], $data['retry'], $data['message']);
         }
@@ -81,5 +90,11 @@ class CheckForMaintenanceMode
         }
 
         return false;
+    }
+    private function isBackendRequest($request)
+    {
+        // dd($request);
+        // dd($request->is('adminsubmit/*'));   
+        return ($request->is('ims/application/*') or $request->is('/*') or $request->is('adminlogin/*') or $request->is('adminsubmit/*'));
     }
 }

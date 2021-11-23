@@ -3,7 +3,7 @@
 @section('pagecss')
 <link href="{{env('APP_URL')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
 <link href="{{env('APP_URL')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-
+<link href="{{ asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{env('APP_URL')}}/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 <link href="{{env('APP_URL')}}/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 
@@ -58,6 +58,15 @@
                                 <td>
                                     <div class="btn-toolbar margin-bottom-2">
                                         <div class="btn-group btn-group-sm btn-group-solid">
+                                            <a  href="{{ route('user.edit', $u->id) }}" class="btn btn-sm btn-primary button">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-toolbar margin-bottom-2">
+                                        <div class="btn-group btn-group-sm btn-group-solid">
                                             <a href="#" data-uid="{{ $u->id }}" class="btn btn-sm btn-danger button">
                                                 <i class="fa fa-trash"></i>
                                             </a>
@@ -79,7 +88,7 @@
 <script src="{{env('APP_URL')}}/assets/global/scripts/datatable.js" type="text/javascript"></script>
 <script src="{{env('APP_URL')}}/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 <script src="{{env('APP_URL')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-
+<script src="{{ asset('assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js') }}" type="text/javascript"></script>
 <script src="{{env('APP_URL')}}/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 <script src="{{env('APP_URL')}}/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
 
@@ -96,11 +105,11 @@
             confirmButtonClass: "btn-success",
             confirmButtonText: "Yes, delete it!",
             showCancelButton: true
-        },
+         },
         function() {
             $.ajax({
                 type: "POST",
-                url: "/deleteUser",
+                url: "{{env('APP_URL')}}/deleteUser",
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'uid':id

@@ -59,7 +59,7 @@
                 <div class="portlet-title">
                     <div class="caption font-red-sunglo">
                         <i class="icon-settings font-red-sunglo"></i>
-                        <span class="caption-subject bold uppercase">Create User</span>
+                        <span class="caption-subject bold uppercase">Edit User</span>
                     </div>
                 </div>
                 <div class="portlet-body form">
@@ -70,7 +70,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label>Name <i class="text-danger">*</i></label>
-                                        <input class="form-control input-lg" required type="text" id="input2" name="employee_data" value = >
+                                        <input class="form-control input-lg" required type="text" id="input2" name="employee_data" value="{{$user['name']}}">
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Username <i class="text-danger">*</i></label>
-                                        <input required type="text" name="domain" class="form-control input-lg">
+                                        <input required type="text" name="domain" class="form-control input-lg" value="{{$user['domainAccount']}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -87,7 +87,7 @@
                                         <label>Role <i class="text-danger">*</i></label>
                                         <select name="role_id" id="role_id" class="form-control select2">
                                             @foreach($roles as $role)
-                                            <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
+                                            <option value="{{ $role['id'] }}" {{ ($role['id'] == $user['roleid']) ? 'selected' : '' }}>{{ $role['name'] }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -95,13 +95,35 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Assigned Modules <i class="text-danger">*</i></label>
-                                        <select name="modules[]" id="multiple" class="form-control select2-multiple" multiple>
-                                            <option></option>
-                                            <option value="admin">Admin</option>
+                                       <?php
+                                        $accessrights = explode("|", $user->access_rights);
+            ?>
+                                        <select  name="modules[]" id="multiple" class="form-control select2-multiple" multiple>
+                                        @foreach($accessrights as $accessright)
+                                           
+                                            <option value="admin"  {{ ($accessright.contains("admin")) ? 'selected' : '' }}>Admin</option>
+                                          
+                                            @if($accessright == "purchasing")
+                                            <option value="purchasing"  {{ ($accessright == "purchasing") ? 'selected' : '' }}>Purchasing</option>
+                                            @else
                                             <option value="purchasing">Purchasing</option>
+                                            @endif
+                                            @if($accessright == "accounting")
+                                            <option value="accounting"  {{ ($accessright == "accounting") ? 'selected' : '' }}>Accounting</option>
+                                            @else
                                             <option value="accounting">Accounting</option>
+                                            @endif
+                                            @if($accessright == "logistics")
+                                            <option value="logistics"  {{ ($accessright == "logistics") ? 'selected' : '' }}>Logistics</option>
+                                            @else
                                             <option value="logistics">Logistics</option>
+                                            @endif
+                                            @if($accessright == "receiving")
+                                            <option value="receiving"  {{ ($accessright == "receiving") ? 'selected' : '' }}>Receiving</option>
+                                            @else
                                             <option value="receiving">Receiving</option>
+                                            @endif
+                                        @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -129,7 +151,9 @@
 
 <script>
     $(document).ready(function() {
-        var employees = {!! \App\users::employee_lookup() !!}
+        var employees = {
+            !!\App\ users::employee_lookup() !!
+        }
 
         var employees = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace,

@@ -44,11 +44,11 @@ class ApplicationService
 
         if ($application) 
         {
-            return redirect('/ims/applications')->with('success', 'Scheduled Maintenance has been added successfully!');
+            return  redirect()->route('maintenance.application.index')->with('success', 'Scheduled Maintenance has been added successfully!');
         } 
         else 
         {
-            return redirect('/ims/applications')->with('errors', 'Adding Scheduled Maintenance failed.');
+            return  redirect()->route('maintenance.application.index')->with('errors', 'Adding Scheduled Maintenance failed.');
         }
     }
 

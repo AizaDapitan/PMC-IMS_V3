@@ -29,7 +29,7 @@
         <div class="col-md-12">
         
             <form class="col-md-4 col-md-offset-4" style="margin-top: 20px;" method="POST" 
-                action="{{ route('applications.update', $application->id) }}">
+                action="{{ route('maintenance.application.update', $application->id) }}">
                 @csrf
                 @method('PUT')              
 
@@ -54,7 +54,7 @@
                     <input type="text" class="form-control" name="reason" id="reason" value="{{$application->reason}}" required maxlength="50"/>
                 </div>                
 
-                <a href="{{ route('applications.index') }}" class="btn btn-primary pull-left">Back </a>
+                <a href="{{ route('maintenance.application.index') }}" class="btn btn-primary pull-left">Back </a>
                 <button class="btn btn-primary pull-right"> Update </button>
 
             </form>

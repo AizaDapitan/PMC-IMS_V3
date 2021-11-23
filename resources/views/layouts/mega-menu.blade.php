@@ -114,7 +114,7 @@
                 </ul>
             </li>
 
-            @if(auth()->user()->role == 'ict')
+            @if(auth()->user()->role == 'ict' || auth()->user()->role == 'admin' || auth()->user()->role == 'ADMIN')
                 <li class="dropdown more-dropdown">
                     <a href="javascript:;" class="text-uppercase">
                         <i class="fa fa-cogs"></i> Settings</a>
@@ -143,7 +143,7 @@
                         </li>               
 
                         <li>
-                            <a href="{{ route('applications.index') }}"><i class="fa fa-users"></i> Applications</a>
+                            <a href="{{ route('maintenance.application.index') }}"><i class="fa fa-users"></i> Applications</a>
                         </li>                        
                     </ul>
                 </li>
