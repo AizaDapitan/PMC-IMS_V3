@@ -55,6 +55,42 @@
 
     <div class="row">
         <div class="col-md-12">
+        @if(Session::has('success'))
+
+<script>
+    setTimeout(function() {
+        $('#success').fadeOut();
+    }, 3000);
+</script>
+
+<div id="success" class="alert alert-success alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><span class="fa fa-check-square-o"></span> Success!</strong> {{ Session::get('success') }}
+</div>
+@endif
+
+@if(Session::has('error'))
+
+<script>
+    setTimeout(function() {
+        $('#error').fadeOut();
+    }, 3000);
+</script>
+<div id="error" class="alert alert-danger alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><span class="fa fa-warning"></span> Error!</strong> {{ Session::get('error') }}
+</div>
+
+@endif
+@if ($errors->any())
+<script>
+    $('#error_any').fadeOut();
+</script>
+<div id="error_any" class="alert alert-danger alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><span class="fa fa-warning"></span> Error!</strong> {{ $errors->first() }}
+</div>
+@endif
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-red-sunglo">
@@ -67,10 +103,16 @@
                         @csrf
                         <div class="form-body">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Name <i class="text-danger">*</i></label>
                                         <input class="form-control input-lg" required type="text" id="input2" name="employee_data" value = >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Email <i class="text-danger">*</i></label>
+                                        <input class="form-control input-lg" required type="text" id="input2" name="email" id="email" value = >
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +121,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Username <i class="text-danger">*</i></label>
-                                        <input required type="text" name="domain" class="form-control input-lg">
+                                        <input required type="text" name="domainAccount" class="form-control input-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-4">

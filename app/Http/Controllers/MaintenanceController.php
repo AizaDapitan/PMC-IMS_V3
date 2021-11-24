@@ -16,6 +16,8 @@ use App\users;
 use App\AuditLogs;
 use Faker\Test\Provider\en_ZA\CompanyTest;
 use App\Role;
+use Illuminate\Support\Facades\Session;
+use App\Notifications\EmailNotification;
 
 class MaintenanceController extends Controller
 {
@@ -27,7 +29,7 @@ class MaintenanceController extends Controller
 
     public function user_index()
     {
-        $users = users::where('id', '>', 5)->orderBy('id', 'desc')->paginate(10);
+        $users = users::where([['id', '>', 5],['isActive', '=', 1]])->orderBy('id', 'desc')->paginate(10);
 
         return view('maintenance.users', compact('users'));
     }
@@ -44,9 +46,13 @@ class MaintenanceController extends Controller
     public function user_store(Request $req)
     {
         $data = $req->all();
+        $req->validate([
 
+            'domainAccount' => 'required|unique:users',
+            'email' => 'required|email|unique:users'
+
+        ]);
         $employee = explode(' : ', $req->employee_data);
-dd($req->employee_data);
         $selected_modules = $data['modules'];
 
         $values = "";
@@ -55,14 +61,18 @@ dd($req->employee_data);
             $values .= $module . '|';
             $modules = rtrim($values, '|');
         }
+        $roleArr = Role::find($req->input('role_id'));
+        $role = $roleArr['name'];
         $user = users::create([
-            'domainAccount' => $req->domain,
+            'domainAccount' => $req->domainAccount,
             'name'          => $employee[0],
             'password'      => Hash::make('password', array('rounds' => 12)),
             'isActive'      => 1,
-            'role'          => $req->role,
+            'role'          => $role,
             'dept'          => $employee[1],
             'access_rights' => $modules,
+            'role_id'        =>$req->roleid,
+            'email'         =>$req->email,    
             'remember_token' => str_random(10)
         ]);
 
@@ -71,7 +81,10 @@ dd($req->employee_data);
             'message' => 'User has been added successfully.',
             'alert-type' => 'success'
         );
-
+        Session::flash('success', "A user is added.");
+        if ($req->session()->get('success') == "A user is added.") {
+            $user->notify(new EmailNotification($user));
+        }
         return redirect()->route('users.index')->with('notification', $notification);
     }
     public function user_edit(Request $request, $id)
@@ -83,11 +96,59 @@ dd($req->employee_data);
             'user',
         ));
     }
-    public function destroyUser(Request $r)
+    public function user_Update(Request $r)
     {
-        users::find($r->uid)->delete();
+        $a = '';
+        $data = $r->all();
+        $employee = explode(' : ', $r->employee_data);
+        $selected_modules = $data['modules'];
 
-        return response()->json();
+        $values = "";
+
+        foreach ($selected_modules as $key => $module) {
+            $values .= $module . '|';
+            $modules = rtrim($values, '|');
+        }
+        
+        $roleArr = Role::find($r->input('role_id'));
+        $role = $roleArr['name'];
+        $user = users::find($r->uid)->update([
+            'name'          => $employee[0],
+            'domainAccount' => $r->domainAccount,
+            'role'          => $role,
+            'dept'          => $employee[1],
+            'access_rights' => $modules,
+            'role_id'        => $r->input('role_id'),
+            'email'         => $r->input('email'),
+        ]);
+        if ($user) {
+            $notification = array(
+                'message' => 'User successfully updated . . .',
+                'alert-type' => 'info'
+            );
+        } else {
+            $notification = array(
+                'message' => 'User updation failed . . .',
+                'alert-type' => 'warning'
+            );
+        }
+
+        return redirect()->route('users.index')->with('notification', $notification);
+    }
+    public function destroyUser($id)
+    {
+        $user = users::find($id);
+
+        $user->update(['isActive' => 0]);
+
+        $notification = array(
+            'message' => 'User has been removed successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('users.index')->with('notification', $notification);
+        
+        return redirect()->back();
     }
 
     public function editUser(Request $r)

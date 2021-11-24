@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 ######################################################################################
 // Main Routes
 Route::post('/ims/checklogin', 'Auth\LoginController@checklogin');
@@ -155,11 +156,12 @@ Route::group(['middleware' => ['authenticated']], function () {
 	Route::get('/ims/settings/users/create','MaintenanceController@user_create')->name('user.create');
 	Route::get('/ims/settings/users/{id}/edit','MaintenanceController@user_edit')->name('user.edit');
 	Route::post('/ims/settings/user-store','MaintenanceController@user_store')->name('user.store');
+	Route::post('/ims/settings/user-update','MaintenanceController@user_update')->name('user.update');
 	Route::get('/ims/user/profile/{id}','MaintenanceController@profile')->name('user.profile');
 	Route::post('/ims/user/change-password','MaintenanceController@change_password')->name('user.password-update');
 
 	// Route::post('/user/edit', 'MaintenanceController@editUser');
-	Route::post('/deleteUser','MaintenanceController@destroyUser');
+Route::delete('deleteUser/{id}','MaintenanceController@destroyUser')->name('user.destroy');
 
 	// Route::get('/ims/maintenance/logs', 'MaintenanceController@logs')->middleware('authenticated');
 	// Route::get('/filter/logs','MaintenanceController@filterLogs')->name('post');
@@ -231,7 +233,6 @@ Route::group(['middleware' => ['authenticated']], function () {
 Route::get('/ims/maintenance/users','MaintenanceController@users')->middleware('authenticated');
 Route::post('/user/add', 'MaintenanceController@addUser');
 Route::post('/user/edit', 'MaintenanceController@editUser');
-Route::post('/deleteUser','MaintenanceController@destroyUser');
 
 Route::post('/drr/copyFile','ProcessesController@drr_copy_file');
 Route::post('/logistics/copyFile','ProcessesController@logistics_copy_file');
