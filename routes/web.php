@@ -53,7 +53,7 @@ Route::group(['middleware' => ['authenticated']], function () {
 
 // Purchasing
 	// Route::get('/ims/purchasing','ProcessesController@purchasingIndex')->name('purchasing.index');
-	Route::get('/ims/po/create','PurchasingController@addPO')->middleware('authenticated');
+	Route::get('/ims/po/create','PurchasingController@addPO')->name('po.create')->middleware('authenticated');
 	Route::post('/ims/po/save','PurchasingController@savePO')->name('po.store');
 	Route::get('/ims/po/edit/{id}','PurchasingController@editPO');
 	Route::get('/ims/po/check_duplicate/{id}', 'PurchasingController@checkDuplicatePO');

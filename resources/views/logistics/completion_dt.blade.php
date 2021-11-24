@@ -62,7 +62,8 @@
                                         <td>{{ \App\PO::deliveryProgress($data->qty,$data->id) }}% DELIVERED</td>
                                         <td>{{ $data->status }}</td>
                                         <td>
-                                            <a href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple"><i class="fa fa-eye"></i></a>
+                                            <!-- <a href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple"><i class="fa fa-eye"></i></a> -->                                            
+                                            <a href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 @empty

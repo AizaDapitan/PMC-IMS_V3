@@ -110,7 +110,10 @@
                                 @forelse($shipments as $shipment)
                                     <tr>
                                         <td>{{ $row++ }}</td>
-                                        <td><a target="_blank" href="/ims/po/details/{{$shipment->po_details->id}}">{{ $shipment->po_details->poNumber }}</a></td>
+                                        <!-- <td><a target="_blank" href="/ims/po/details/{{$shipment->po_details->id}}">{{ $shipment->po_details->poNumber }}</a></td> -->
+
+                                        <td><a href="{{env('APP_URL')}}/ims/po/details/{{$shipment->po_details->id}}">{{ $shipment->po_details->poNumber }}</a></td>
+
                                         <td>{{ $shipment->po_details->supplier_name->name }}</td>
                                         <td>{{ $shipment->waybill == 'shipment' ? 'N/A' : $shipment->waybill }}</td>
                                         <td class="text-uppercase">{{ $shipment->log_type }}</td>

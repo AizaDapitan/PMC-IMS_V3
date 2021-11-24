@@ -21,10 +21,14 @@
                         <i class="fa fa-briefcase"></i> Purchasing</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="/ims/po/create">Create New PO</a>
+                            <!-- <a href="/ims/po/create">Create New PO</a> -->
+                            <!-- <a href="{{env('APP_URL')}}/ims/po/create">Create New PO</a> -->
+
+                            <a href="{{ route('po.create') }}">Create New PO</a>
                         </li>
                         <li>
-                            <a href="/ims/supplier">Manage Suppliers</a>
+                            <!-- <a href="/ims/supplier">Manage Suppliers</a> -->
+                            <a href="{{ route('supplier.index') }}">Manage Suppliers</a>
                         </li>
                         <li>
                             <a href="{{ route('purchasing.kpi') }}">Purchasing KPI</a>

@@ -71,7 +71,10 @@
                                 @forelse($collection as $data)
                                     <tr>
                                         <td>{{ ($collection->currentpage()-1) * $collection->perpage() + $loop->index + 1 }}</td>
-                                        <td><a target="_blank" href="{{ route('po.details',$data->poId) }}">{{ $data->po_details->poNumber }}</a></td>
+                                        <!-- <td><a target="_blank" href="{{ route('po.details',$data->poId) }}">{{ $data->po_details->poNumber }}</a></td> -->
+
+                                        <td><a href="{{ route('po.details',$data->poId) }}">{{ $data->po_details->poNumber }}</a></td>
+
                                         <td>{{ $data->po_details->supplier_name->name }}</td>
                                         <td class="text-right">{{ number_format($data->amount,2) }}</td>
                                         <td>{{ $data->po_details->currency }}</td>

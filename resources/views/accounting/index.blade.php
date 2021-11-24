@@ -96,14 +96,18 @@
                                         <td>
                                             <div class="btn-toolbar margin-bottom-2">
                                                 <div class="btn-group btn-group-sm btn-group-solid">
-                                                    <a href="/ims/po/details/{{$payment->poId}}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details">
+                                                    <!-- <a href="/ims/po/details/{{$payment->poId}}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details"> -->
+
+                                                    <a href="{{env('APP_URL')}}/ims/po/details/{{$payment->poId}}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details">                                                    
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     @if($payment->isPaid == 0)
                                                         <a href="#paidModal" data-toggle="modal" data-amount="{{number_format($payment->amount,2)}}" data-poid="{{$payment->poId}}" data-ppid="{{ $payment->id }}" data-pon="{{ $payment->po_details->poNumber }}" class="paid btn btn-sm blue tooltips" data-container="body" data-placement="top" data-original-title="Mark Payment as Paid">
                                                             <i class="icon-check"></i>
                                                         </a>
-                                                        <a href="/ims/payment-schedule/edit/{{$payment->poId}}" class="btn btn-sm btn-warning tooltips" data-container="body" data-placement="top" data-original-title="Update Payment">
+                                                        <!-- <a href="/ims/payment-schedule/edit/{{$payment->poId}}" class="btn btn-sm btn-warning tooltips" data-container="body" data-placement="top" data-original-title="Update Payment"> -->
+
+                                                        <a href="{{env('APP_URL')}}/ims/payment-schedule/edit/{{$payment->poId}}" class="btn btn-sm btn-warning tooltips" data-container="body" data-placement="top" data-original-title="Update Payment">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                         <a href="#delete_payment" data-toggle="modal" data-dpid="{{$payment->id}}" class="btn btn-sm btn-danger tooltips delete" data-container="body" data-placement="top" data-original-title="Delete Payment">

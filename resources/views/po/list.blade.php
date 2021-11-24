@@ -16,7 +16,7 @@
         <h1>PO Summary List</h1>
         <ol class="breadcrumb">
             <li>
-                <a href="#">Dashboard</a>
+                <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li class="active">PO Summary List</li>
         </ol>
@@ -119,7 +119,10 @@
                                             @if($data->status == 'OPEN')
                                                 <div class="btn-toolbar margin-bottom-2">
                                                     <div class="btn-group btn-group-sm btn-group-solid">
-                                                        <a target="_blank" href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details">
+                                                        <!-- <a target="_blank" href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details"> -->
+
+                                                        <a href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details">
+
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         @if(auth()->user()->is_an_admin())
@@ -174,7 +177,9 @@
                                                     </div>
                                                 </div>
                                             @else
-                                                <a target="_blank" href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Summary"><i class="fa fa-eye"></i></a>
+                                                <!-- <a target="_blank" href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Summary"><i class="fa fa-eye"></i></a> -->
+
+                                                <a href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Summary"><i class="fa fa-eye"></i></a>
                                             @endif
                                         </td>
                                     </tr>

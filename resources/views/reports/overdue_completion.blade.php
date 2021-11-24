@@ -110,7 +110,10 @@
                                     @if($y == 1)
                                         <tr>
                                             <td>{{ $row++ }}</td>
-                                            <td><a target="_blank" href="/ims/po/details/{{ $data->id }}">{{ $data->poNumber }}</a></td>
+                                            <!-- <td><a target="_blank" href="/ims/po/details/{{ $data->id }}">{{ $data->poNumber }}</a></td> -->
+
+                                            <td><a href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}">{{ $data->poNumber }}</a></td>
+
                                             <td>{{ $data->supplier_name->name }}</td>
                                             <td>{{ $data->orderDate }}</td>
                                             <td>{{ $data->expectedCompletionDate }}</td>
