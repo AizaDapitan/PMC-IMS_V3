@@ -135,7 +135,7 @@
                                                         @endif
 
                                                         @if(auth()->user()->checkPermission('update_po'))
-                                                            <a href="/ims/po/edit/{{ $data->id }}" class="btn btn-sm btn-primary tooltips" data-container="body" data-placement="top" data-original-title="Update PO">
+                                                            <a href="{{env('APP_URL')}}/ims/po/edit/{{ $data->id }}" class="btn btn-sm btn-primary tooltips" data-container="body" data-placement="top" data-original-title="Update PO">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
                                                         @endif
@@ -150,7 +150,7 @@
 
                                                         @if(auth()->user()->checkPermission('update_payment'))
                                                             @if(\App\PaymentSchedule::count_payments($data->id) >= 1)
-                                                                <a href="/ims/payment-schedule/edit/{{$data->id}}" class="btn btn-sm btn-success tooltips" data-container="body" data-placement="top" data-original-title="Update Payment">
+                                                                <a href="{{env('APP_URL')}}/ims/payment-schedule/edit/{{$data->id}}" class="btn btn-sm btn-success tooltips" data-container="body" data-placement="top" data-original-title="Update Payment">
                                                                     <i class="fa fa-edit"></i>
                                                                 </a>
                                                             @endif
@@ -168,7 +168,7 @@
                                                             @endif
 
                                                             @if(\App\PaymentSchedule::count_payments($data->id) >= 1)
-                                                                <a href="/ims/payment-schedule/edit/{{$data->id}}" class="btn btn-sm btn-warning tooltips" data-container="body" data-placement="top" data-original-title="Update Payment">
+                                                                <a href="{{env('APP_URL')}}/ims/payment-schedule/edit/{{$data->id}}" class="btn btn-sm btn-warning tooltips" data-container="body" data-placement="top" data-original-title="Update Payment">
                                                                     <i class="fa fa-edit"></i>
                                                                 </a>
                                                             @endif
