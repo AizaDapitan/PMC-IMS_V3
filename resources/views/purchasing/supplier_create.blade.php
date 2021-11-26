@@ -39,13 +39,13 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Supplier Code <i class="text-danger">*</i></label>
-                                        <input required name="code" type="text" class="form-control input-lg">
+                                        <input name="code" type="text" class="form-control input-lg" required maxlength="20" placeholder="Supplier Code">
                                     </div>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label>Name <i class="text-danger">*</i></label>
-                                        <input required name="name" type="text" class="form-control input-lg">
+                                        <input name="name" type="text" class="form-control input-lg" required maxlength="30" placeholder="Name">
                                     </div>
                                 </div>
                             </div>
@@ -54,19 +54,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Contact <i class="text-danger">*</i></label>
-                                        <input required type="text" name="contact" class="form-control input-lg" placeholder="Tel # / CP # / Email">
+                                        <input type="text" name="contact" class="form-control input-lg" required maxlength="30" placeholder="Tel # / CP # / Email">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Contact Person <i class="text-danger">*</i></label>
-                                        <input required type="text" name="contact_person" class="form-control input-lg">
+                                        <input type="text" name="contact_person" class="form-control input-lg" required maxlength="30" placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>LTO Validity <i class="text-danger">*</i></label>
-                                        <input required type="text" name="lto" class="form-control input-lg">
+                                        <input type="text" name="lto" class="form-control input-lg" required maxlength="30" placeholder="LTO Validity">
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Address <i class="text-danger">*</i></label>
-                                        <textarea required name="address" class="form-control input-lg" rows="3"></textarea>
+                                        <textarea name="address" class="form-control input-lg" rows="3" required maxlength="50" placeholder="Address"></textarea>
                                     </div>
                                 </div>
                             </div>

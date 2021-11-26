@@ -93,7 +93,7 @@ class MaintenanceController extends Controller
         $roles = Role::where('active', '1')->get();
         return view('maintenance.user_edit', compact(
             'roles',
-            'user',
+            'user'
         ));
     }
     public function user_Update(Request $r)

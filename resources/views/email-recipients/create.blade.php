@@ -33,12 +33,12 @@
 
                 <div class="form-group">
                     <label> Name </label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" required maxlength="30" placeholder="Name"> 
                 </div>
 
                 <div class="form-group">
                     <label> Email </label>
-                    <input type="email" name="email" class="form-control">
+                    <input type="email" name="email" class="form-control" placeholder="Email">
                 </div>
 
                 <button class="btn btn-primary pull-right"> Create </button>

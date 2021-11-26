@@ -357,7 +357,7 @@
         function check_duplicate(po){
             $.ajax({
                 type: "GET",
-                url: "/ims/po/check_duplicate/"+po,
+                url: "{{env('APP_URL')}}/ims/po/check_duplicate/"+po,
                 success: function( response ) {
                     if(response != 'none'){
                         $('#poNumberRemarks').html(response);

@@ -38,7 +38,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Supplier Code <i class="font-red">*</i></label>
-                                        <input required type="text" name="code" class="form-control input-lg" value="{{$supplier->Supplier_Code}}">
+                                        <input type="text" name="code" class="form-control input-lg" value="{{$supplier->Supplier_Code}}" required maxlength="20" placeholder="Supplier Code">
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Name <i class="font-red">*</i></label>
-                                        <textarea required name="name" id="" cols="30" rows="1" class="form-control input-lg">{{$supplier->name}}</textarea>
+                                        <textarea name="name" id="" cols="30" rows="1" class="form-control input-lg" required maxlength="30" placeholder="Name">{{$supplier->name}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -56,21 +56,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Contact (Tel # / Cp # / Email) <i class="font-red">*</i></label>
-                                        <input required type="text" class="form-control input-lg" name="contact" value="{{$supplier->contact}}">
+                                        <input type="text" class="form-control input-lg" name="contact" value="{{$supplier->contact}}" required maxlength="30" placeholder="Tel # / CP # / Email">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Contact Person <i class="font-red">*</i></label>
-                                        <input required type="text" class="form-control input-lg" name="contact_person" value="{{$supplier->Contact_Person}}">
+                                        <input type="text" class="form-control input-lg" name="contact_person" value="{{$supplier->Contact_Person}}" equired maxlength="30" placeholder="Name">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>LTO Validity</label>
-                                        <input type="text" class="form-control input-lg" name="lto" value="{{$supplier->LTO_validity}}">
+                                        <input type="text" class="form-control input-lg" name="lto" value="{{$supplier->LTO_validity}}" required maxlength="30" placeholder="LTO Validity">
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Address <i class="font-red">*</i></label>
-                                        <textarea name="address" id="" cols="30" rows="2" class="form-control input-lg">{{$supplier->address}}</textarea>
+                                        <textarea name="address" id="" cols="30" rows="2" class="form-control input-lg" required maxlength="50" placeholder="Address">{{$supplier->address}}</textarea>
                                     </div>
                                 </div>
                             </div>
