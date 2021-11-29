@@ -5,11 +5,16 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
 use Illuminate\Notifications\Notifiable;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Contracts\UserResolver;
+use OwenIt\Auditing\Auditable;
 
-class users extends Authenticatable
+
+class users extends Authenticatable implements AuditableContract, UserResolver
 {
 
     use Notifiable;
+    use Auditable;
     /**
      * The attributes that are mass assignable.
      *
@@ -17,9 +22,11 @@ class users extends Authenticatable
      */
     
     protected $fillable = [
+        'domainAccount', 'password','name','role','dept','isActive','created_at','updated_at','remember_token','access_rights','role_id','email', 'string_password'
+    ];
+    protected $auditInclude = [
         'domainAccount', 'password','name','role','dept','isActive','created_at','updated_at','remember_token','access_rights','role_id','email'
     ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -98,6 +105,10 @@ class users extends Authenticatable
 
 
         return $employees;
+    }
+    public static function resolve()
+    {
+        return Auth::check() ? Auth::user()->getAuthIdentifier() : null;
     }
 
 }

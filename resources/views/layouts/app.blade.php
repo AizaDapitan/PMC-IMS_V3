@@ -32,6 +32,9 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS -->
   <link href="{{env('APP_URL')}}/assets/global/plugins/bootstrap-toastr/toastr_notification.css" rel="stylesheet" type="text/css" />
+  
+<link href="{{ url('plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <style>
     .page-content {
       min-height: 860px !important;
@@ -250,6 +253,7 @@
       <label aria-labelledby="countdown" id="countdown" style="display:none; font-weight:bold">Time Remaining : </label>
       @endif
     </div>
+
     </header>
     <!-- END HEADER -->
     <div class="container-fluid">
@@ -294,6 +298,11 @@
 
   <!-- PAGE LEVEL PLUGINS -->
   <script src="{{env('APP_URL')}}/assets/pages/scripts/toastr_notification.min.js" type="text/javascript"></script>
+  
+<script src="{{ url('plugins/datatables/datatable.js') }}" type="text/javascript"></script>
+<script src="{{ url('plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
+
+<script src="{{ url('plugins/datatables/table-datatables-buttons.js') }}" type="text/javascript"></script>
   @yield('pagejs')
   <!-- END PAGE LEVEL PLUGINS-->
 

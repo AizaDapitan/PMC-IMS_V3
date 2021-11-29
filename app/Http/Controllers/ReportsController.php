@@ -8,14 +8,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Auth;
 use \Carbon\Carbon;
+use App\Services\ReportService;
+use App\Services\UserService;
 
 use App\supplier;
 use App\PaymentSchedule;
 use App\logistics;
 use App\PO;
+use App\Log;
+use \OwenIt\Auditing\Models\Audit;
 
 class ReportsController extends Controller
 {
+    public function __construct(
+		// RoleRightService $roleRightService,
+		ReportService $reportService,
+		UserService $userService
+	) {
+		$this->reportService = $reportService;
+		// $this->roleRightService = $roleRightService; 
+		$this->userService = $userService;
+
+	}
 
 // Delivery Status
     public function filter_delivery_status()
@@ -25,7 +39,7 @@ class ReportsController extends Controller
         return $this->delivery_status($params);
     }
 
-    public function delivery_status($param = null)
+    public function delivery_status(Request $request,$param = null)
     {
         $shipments = logistics::whereNotNull('id');
         $pageLimit = 10;
@@ -65,6 +79,7 @@ class ReportsController extends Controller
 
         $shipments = $shipments->paginate($pageLimit);
 
+        $saveLogs = $this->reportService->create("Delivery Status", $request);
         return view('reports.delivery_status',compact('shipments','param'));
     }
 //
@@ -78,7 +93,7 @@ class ReportsController extends Controller
         return $this->po_status($params);
     }
 
-    public function po_status($param = null)
+    public function po_status(Request $request,$param = null)
     {
         $purchases = PO::whereNotNull('id');
         
@@ -100,6 +115,7 @@ class ReportsController extends Controller
 
         $purchases = $purchases->get();
 
+        $saveLogs = $this->reportService->create("PO per Status", $request);
         return view('reports.po-per-status',compact('purchases','param'));
     }
 //
@@ -113,7 +129,7 @@ class ReportsController extends Controller
         return $this->overdue_completion($params);
     }
 
-    public function overdue_completion($param = null){
+    public function overdue_completion(Request $request,$param = null){
         $collection = PO::where('status','OPEN');
 
         if(isset($param)){
@@ -132,6 +148,8 @@ class ReportsController extends Controller
 
         $collection = $collection->get();
         
+        
+        $saveLogs = $this->reportService->create("Overdue Completion", $request);
         return view('reports.overdue_completion',compact('collection','param'));
     }
 //
@@ -145,7 +163,7 @@ class ReportsController extends Controller
         return $this->overdue_shipments($params);
     }
 
-    public function overdue_shipments($param = null){
+    public function overdue_shipments(Request $request,$param = null){
         $collection = logistics::where('status','Delivered');
 
         $pageLimit = 10;
@@ -170,18 +188,85 @@ class ReportsController extends Controller
 
         $collection = $collection->paginate($pageLimit);
         
+        $saveLogs = $this->reportService->create("Overdue Deliveries", $request);
         return view('reports.overdue_shipments',compact('collection','param'));
     }
 //
 
 // Overdue Payables
-    public function overdue_payables()
+    public function overdue_payables(Request $request)
     {
         $collection = PaymentSchedule::where('isPaid',0)->whereDate('paymentDate','<',Carbon::today())->orderBy('paymentDate','desc')->paginate(15);
 
+        $saveLogs = $this->reportService->create("Overdue Payables", $request);
         return view('reports.overdue_payables',compact('collection'));
 
         //return view('reports.overdue_payables',compact('collection','param'));
     }
+
+    public function errorLogs(Request $request)
+    {
+        // $rolesPermissions = $this->roleRightService->hasPermissions("Error Logs");
+
+        // if (!$rolesPermissions['view']) {
+        //     abort(401);
+        // }
+        $dateFrom = now()->toDateString();
+        $dateTo = now()->toDateString();
+        if (isset($request->dateFrom)) {
+            $dateFrom = $request->dateFrom;
+        }
+        if (isset($request->dateTo)) {
+            $dateTo = $request->dateTo;
+        }
+
+        $error_list = Log::when(isset($dateTo), function($q) use($dateFrom, $dateTo){
+            $q->whereBetween('created_at', [$dateFrom.' 00:00:00', $dateTo.' 23:59:59']);
+        })
+       ->when(!isset($dateTo), function($q) use($dateFrom){
+            $q->whereDate('created_at', $dateFrom);
+        })
+        ->orderBy('created_at','desc')->get();
+         $saveLogs = $this->reportService->create("Error Logs", $request);
+        return view('reports.error', ['error_list' => $error_list]);
+    }
+    public function auditLogs(Request $request)
+	{
+		// $rolesPermissions = $this->roleRightService->hasPermissions("Audit Logs");
+		// if (!$rolesPermissions['view']) {
+		//     abort(401);
+		// }
+		$dateFrom = now()->toDateString();
+		$dateTo = now()->toDateString();
+		$userid = 0;
+		if (isset($request->dateFrom)) {
+			$dateFrom = $request->dateFrom;
+		}
+		if (isset($request->dateTo)) {
+			$dateTo = $request->dateTo;
+		}
+		if (isset($request->userid)) {
+			$userid = $request->userid;
+		}
+
+		$users =  $this->userService->all()->where('isActive', 1)->where('domainAccount', '<>', '')->sortBy('domainAccount');
+
+		$audits = Audit::when(isset($dateTo), function ($q) use ($dateFrom, $dateTo) {
+			$q->whereBetween('created_at',  [$dateFrom . ' 00:00:00', $dateTo . ' 23:59:59']);
+		})
+			->when(!isset($dateTo), function ($q) use ($dateFrom) {
+				$q->whereDate('created_at', $dateFrom);
+			})
+			->when($userid != 0, function ($q) use ($userid) {
+				$q->where('user_id', $userid);
+			})
+			->orderBy('created_at','desc')->get();
+
+		$saveLogs = $this->reportService->create("Audit Logs", $request);
+		return view('reports.audits', [
+			'audits' => $audits,
+			'users' => $users
+		]);
+	}
 //
 }

@@ -115,6 +115,12 @@
                     <li>
                         <a href="{{ route('overdue.completion') }}">Overdue Completion</a>
                     </li>
+                    <li>
+                        <a href="{{ route('error-logs') }}"> Error Logs</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('audit-logs') }}"> User Actions</a>
+                    </li>
                 </ul>
             </li>
 

@@ -192,22 +192,29 @@ class MaintenanceController extends Controller
     {
         $user = users::find($req->user_id);
 
-        if (Hash::check($req->current, $user->password)) {
-            $user->update(['password' => \Hash::make($req->password_new, array('rounds' => 12))]);
+        $req->validate([
 
-            $notification = array(
-                'message' => 'Password has been changed.',
-                'alert-type' => 'info'
-            );
-
-            return redirect()->route('logout');
-        } else {
-            $notification = array(
-                'message' => 'Incorrect password.',
-                'alert-type' => 'warning'
-            );
-
-            return back()->with('notification', $notification);
+            'current'           => 'required|string',
+            'password_new' 	    => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&._]/'
+        ]);
+      
+        if($req->password_new == $req->confirm_password)
+        {
+            if (Hash::check($req->current, $user->password)) 
+            {            
+                $user->update(['password'  => Hash::make($req->password_new, array('rounds' => 12))]);           
+    
+                \Auth::logout();
+                return redirect('/ims/login');    
+            } 
+            else 
+            {
+                return back()->with('error', 'Something is wrong while trying to change the password');    
+            }  
         }
+        else
+        {
+            return back()->with('error', 'Something is wrong while trying to change the password');
+        }                                           
     }
 }

@@ -2,13 +2,25 @@
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 
-class Role extends Model {
-	
+class Role extends Model implements AuditableContract
+{
 
-	public $table = 'roles';
-
-	public $guarded = [];
+    use Auditable;
 
 
+	protected $guarded = [];
+
+    protected $fillable = [
+        'name', 
+        'description', 
+        'active',
+    ];
+    protected $auditInclude = [
+        'name', 
+        'description', 
+        'active',
+    ];
 }

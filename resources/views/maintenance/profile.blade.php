@@ -25,13 +25,15 @@
 
     <div class="row">
         <div class="col-md-12">
+                    
             <!-- BEGIN PROFILE SIDEBAR -->
             <div class="profile-sidebar">
                 <!-- PORTLET MAIN -->
                 <div class="portlet light profile-sidebar-portlet bordered">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="{{env('APP_URL')}}/images/user.png') }}" class="img-responsive" alt=""> </div>
+                        <img src="{{env('APP_URL')}}/images/user.png') }}" class="img-responsive" alt="">
+                    </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
@@ -62,6 +64,38 @@
                                     </li>
                                 </ul>
                             </div>
+
+                            @if(Session::has('success'))
+
+                            <script>
+                                setTimeout(function() {
+                                    $('#success').fadeOut();
+                                }, 3000);
+                            </script>
+                            <div id="success" class="alert alert-success alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong><span class="fa fa-check-square-o"></span> Success!</strong> {{ Session::get('success') }}
+                            </div>
+
+                            @endif
+
+                            @if(Session::has('error'))
+
+                            <script>
+                                setTimeout(function() {
+                                    $('#error').fadeOut();
+                                }, 3000);
+                            </script>
+                            <div id="error" class="alert alert-danger alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong><span class="fa fa-warning"></span> Error!</strong> {{ Session::get('error') }}
+                            </div>
+
+                            @endif
+                            
+                                            
+                            <br>                            
+                            
                             <div class="portlet-body">
                                 <div class="tab-content">
                                     <!-- PERSONAL INFO TAB -->
@@ -83,6 +117,11 @@
                                                 <label class="control-label">Access Right</label>
                                                 <input class="form-control" type="text" value="{{ $user->access_rights }}">
                                             </div>
+
+                                            <div class="margin-top-10">
+                                                <a href="{{ route('ims.dashboard') }}" class="btn default">Cancel</a>
+                                            </div>
+
                                         </form>
                                     </div>
                                     <!-- END PERSONAL INFO TAB -->
@@ -91,16 +130,27 @@
                                     <div class="tab-pane" id="tab_1_3">
                                         <form method="post" action="{{ route('user.password-update') }}">
                                             @csrf
+
                                             <div class="form-group">
                                                 <input type="hidden" name="user_id" value="{{$user->id}}">
-                                                <label class="control-label">Current Password</label>
-                                                <input type="password" name="current" class="form-control" /> </div>
+                                                <label class="control-label">Current Password * </label>
+                                                <input type="password" name="current" class="form-control" required/> 
+                                            </div>
+
                                             <div class="form-group">
-                                                <label class="control-label">New Password</label>
-                                                <input type="password" name="password_new" class="form-control" /> </div>
+                                                <label class="control-label">New Password * </label>
+                                                <input type="password" name="password_new" class="form-control" required /> 
+                                                <label class="control-label"></label><i class="font-red" style="font-size: 14px;font-weight:bold;">(Min. 8, alphanumeric, at least 1 upper case, 1 number and 1 special character) </i><br>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label">Confirm Password * </label>
+                                                <input type="password" name="confirm_password" class="form-control" required />                                                 
+                                            </div>                                            
+                                            
                                             <div class="margin-top-10">
                                                 <button type="submit" class="btn green"> Change Password </button>
-                                                <a href="javascript:;" class="btn default"> Cancel </a>
+                                                <a href="{{ route('ims.dashboard') }}" class="btn default">Cancel</a>
                                             </div>
                                         </form>
                                     </div>

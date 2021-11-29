@@ -23,7 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
             'repository' => 'App\Repositories\UserRepository',
             'service' => 'App\Services\UserService',
             'model' => [
-                'App\User'
+                'App\users'
             ],
         ),
 

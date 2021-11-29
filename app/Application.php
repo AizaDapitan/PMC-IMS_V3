@@ -6,16 +6,16 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-//use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
-//use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
-class Application extends Model //implements AuditableContract
+class Application extends Model implements AuditableContract
 {
     use Notifiable;
     use SoftDeletes;
-    //use Auditable;
+    use Auditable;
 
     /**
      * The attributes that are mass assignable.

@@ -142,6 +142,9 @@ Route::group(['middleware' => ['authenticated']], function () {
 	Route::get('/filter-overdue-shipments','ReportsController@filter_overdue_shipments')->name('filter.overdue.shipments');
 
 	Route::get('/ims/report/overdue_payables','ReportsController@overdue_payables')->name('overdue.payables');
+	
+    Route::get('audit-logs', 'ReportsController@auditLogs')->name('audit-logs');
+    Route::get('error-logs', 'ReportsController@errorLogs')->name('error-logs');
 
 //
 

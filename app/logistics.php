@@ -2,19 +2,38 @@
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 use \Carbon\Carbon;
 use DB;
 
 use App\PO;
 use App\remarks;
-class logistics extends Model {
+class logistics extends Model implements AuditableContract
+{
+
+    use Auditable;
 
 	protected $guarded = [];
 	
 	public $table = 'logistics';
 
 	public $timestamps = false;
-
+    protected $auditInclude = [
+        'expectedDeliveryDate', 
+        'portArrivalDate', 
+        'customClearedDate',
+        'poId',
+        'waybill',
+        'status',
+        'customStartDate',
+        'actualDeliveryDate',
+        'addedBy',
+        'created_at',
+        'log_type',
+        'departure_dt',
+        'actualManufacturingDate'
+    ];
     public function po_details()
     {
         return $this->belongsTo('App\PO', 'poId');

@@ -2,17 +2,35 @@
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 use \Carbon\Carbon;
 use DB;
 
 use App\logistics;
-class drr extends Model {
+class drr extends Model implements AuditableContract
+{
+    
+    use Auditable;
 
 	protected $guarded = [];
 	
 	public $table = 'drr';
 
 	public $timestamps = false;
+
+    protected $auditInclude = [
+        'poNumber', 
+        'drr', 
+        'drrAmount',
+        'drrQty',
+        'drrDate',
+        'invoice',
+        '[file]',
+        'addedBy',
+        'addedDate',
+        'waybill'
+    ];
 
 	public function ldetails()
     {

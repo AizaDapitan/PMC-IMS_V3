@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use App\User;
+use App\users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
@@ -12,7 +12,7 @@ class UserRepository implements UserRepositoryInterface
     protected $user;
     protected $action;
 
-    public function __construct(User $user)
+    public function __construct(users $user)
     {
         $this->user = $user;
     }

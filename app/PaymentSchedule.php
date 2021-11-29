@@ -2,10 +2,15 @@
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable; 
 
 use \Carbon\Carbon;
 
-class PaymentSchedule extends Model {
+class PaymentSchedule extends Model  implements AuditableContract
+{
+
+    use Auditable;
 
 	protected $guarded = [];
 	
@@ -13,6 +18,19 @@ class PaymentSchedule extends Model {
 
 	public $timestamps = false;
 
+    protected $auditInclude = [
+        'paymentDate',
+        'amount',
+        'poId',
+        'isPaid',
+        'actualPaymentDate',
+        'remarks',
+        'origPaymentDate',
+        'files',
+        'addedBy',
+        'addedDate',
+        'payment_type'
+    ];
 	public function po_details()
     {
         return $this->belongsTo('App\PO', 'poId');

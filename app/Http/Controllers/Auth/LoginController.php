@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\AuditService;
 
 use Validator;
 use Auth;
@@ -11,7 +12,11 @@ use Session;
 
 class LoginController extends Controller
 {
-    
+    public function __construct(
+        AuditService $auditService)
+    {
+        $this->auditService = $auditService;
+    }   
     public function index()
     {
     	return view('auth.login');
@@ -30,6 +35,8 @@ class LoginController extends Controller
         );
     	if(Auth::attempt($user_data))
     	{	
+            
+            $saveLogs = $this->auditService->create($request,"Login User : ". auth()->user()->username,"Login");   
             //file_get_contents('http://172.16.20.27/ims_v3/api/delete.php');
             Session::put('user',$request->domainAccount);
     		return redirect('/ims/dashboard');
@@ -42,8 +49,9 @@ class LoginController extends Controller
 
 
 
-    public function logout()
+    public function logout(Request $request)
     {
+        $saveLogs = $this->auditService->create($request,"Logout User : ". auth()->user()->username,"Logout");
         Auth::logout();
         Session::flush();
         
@@ -64,7 +72,7 @@ class LoginController extends Controller
         // dd(auth()->user()->role);
             if(auth()->user()->role == "ADMIN" || auth()->user()->role == "admin" || auth()->user()->role == "ict")
             {
-                // $saveLogs = $this->auditService->create($request,"Login User : ". auth()->user()->username,"Admin Login");  
+                 $saveLogs = $this->auditService->create($request,"Login User : ". auth()->user()->username,"Admin Login");  
                
                 return redirect()->route('maintenance.application.index');
             }

@@ -8,8 +8,13 @@ use DB;
 use App\PaymentSchedule;
 use App\drr;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 
-class PO extends Model {
+class PO extends Model  implements AuditableContract
+{
+
+    use Auditable;
 
 	protected $guarded = [];
 	
@@ -17,6 +22,39 @@ class PO extends Model {
 
 	public $timestamps = false;
   
+    protected $auditInclude = [
+        'poNumber',
+        'orderDate',
+        'supplier',
+        'itemCommodity',
+		'currency',
+		'amount',
+		'terms',
+		'status',
+		'expectedCompletionDate',
+		'expectedDeliveryDate',
+		'closedDate',
+		'closedBy',
+		'poAmount',
+		'rq',
+		'qty',
+		'addedBy',
+		'addedDate',
+		'updatedBy',
+		'updateDate',
+		'incoterms',
+		'paymentStatus',
+		'deliveryStatus',
+		'origin',
+		'destination_port',
+		'suppliers_lead_time',
+		'delivery_term',
+		'actualDeliveryDate',
+		'actualPaidDate',
+		'rq_date',
+		'mrs_no',
+		'email_receivers'
+    ];
 	public function supplier_name()
     {
         return $this->belongsTo('App\supplier', 'supplier');
