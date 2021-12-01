@@ -56,8 +56,16 @@
                                         <td>{{ $payment->po_details->currency }}</td>
                                         <td>{{ \App\PaymentSchedule::paymnt_aging($payment->paymentDate) }}</td>
                                         <td>
+                                            @if($edit)
                                             <a href="#paidModal" data-toggle="modal" data-amount="{{number_format($payment->amount,2)}}" data-poid="{{$payment->poId}}" data-ppid="{{ $payment->id }}" data-pon="{{ $payment->po_details->poNumber }}" class="paid btn btn-sm blue">Mark as Paid</a>
+                                            @else
+                                            <button disabled href="#paidModal" data-toggle="modal" data-amount="{{number_format($payment->amount,2)}}" data-poid="{{$payment->poId}}" data-ppid="{{ $payment->id }}" data-pon="{{ $payment->po_details->poNumber }}" class="paid btn btn-sm blue">Mark as Paid</button>
+                                            @endif
+                                            @if($delete)
                                             <a href="javascript:;" onclick="delete_payment('{{$payment->id}}');" class="btn btn-sm btn-danger">Delete</a>
+                                            @else
+                                            <button disabled href="javascript:;" onclick="delete_payment('{{$payment->id}}');" class="btn btn-sm btn-danger">Delete</button>
+                                           @endif
                                         </td>
                                     </tr>
                                 @empty

@@ -45,13 +45,19 @@ Route::group(['middleware' => ['authenticated']], function () {
 	Route::get('/ims/accounting/overdue', 'AccountingController@overdue')->name('accounting.overdue-payments');
 
 
+<<<<<<< HEAD
+	Route::post('/mark_as_paid', 'AccountingController@mark_as_paid');
+	Route::get('/ims/payment-schedule/edit/{id}', 'AccountingController@edit');
+	Route::post('/delete-payment', 'AccountingController@destroy')->name('payment.delete');
+=======
 	//Route::post('/mark_as_paid','AccountingController@mark_as_paid');
 
 	Route::post('/ims/mark_as_paid', 'AccountingController@mark_as_paid')->name('modal.payments.mark_as_paid');
 	Route::get('/ims/mark_as_paid', 'AccountingController@mark_as_paid')->name('modal.payments.mark_as_paid');
 
-	Route::get('/ims/payment-schedule/edit/{id}', 'AccountingController@edit');
-	Route::post('/delete-payment', 'AccountingController@destroy')->name('payment.delete');
+	Route::get('/ims/payment-schedule/edit/{id}','AccountingController@edit');
+	Route::post('/delete-payment','AccountingController@destroy')->name('payment.delete');
+>>>>>>> 8da9affbec8ff5749bdd0a027ec1d21754a0fa65
 
 	Route::post('/payment/preview-file', 'AccountingController@preview_file');
 	//

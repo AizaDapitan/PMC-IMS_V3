@@ -15,30 +15,55 @@ use App\supplier;
 use App\PaymentSchedule;
 use App\TempPaymentSchedule;
 use App\AuditLogs;
+use App\Services\RoleRightService;
 
 class PurchasingController extends Controller
 {
     // PURCHASING MODULE
-
+    public function __construct(
+        RoleRightService $roleRightService
+    ) {
+        $this->roleRightService = $roleRightService;
+    }
     public function addPO()
     {
+        $rolesPermissions = $this->roleRightService->hasPermissions("Create New PO");
+
+        if (!$rolesPermissions['view']) {
+            abort(401);
+        }
+
+        $create = $rolesPermissions['create'];
+        $edit = $rolesPermissions['edit'];
+        $delete = $rolesPermissions['delete'];
+        $print = $rolesPermissions['print'];
+        $upload = $rolesPermissions['upload'];
+
         $supplier = supplier::all();
         $origin = DB::table('country_origin')->get();
 
-        return view('purchasing.add',compact('supplier','origin'));  
+        return view('purchasing.add', compact(
+            'supplier',
+            'origin',
+            'create',
+            'edit',
+            'delete',
+            'print',
+            'upload'
+        ));
     }
 
     public function savePO(Request $req)
-    {   
-            
+    {
+
         $data    = $req->all();
         $dates   = $data['date'];
         $amounts = $data['amount'];
         $ptypes  = $data['payment_type'];
-        
+
 
         $add = PO::create([
-            'poNumber'              => $req->po_no, 
+            'poNumber'              => $req->po_no,
             'rq'                    => $req->rq,
             'orderDate'             => $req->dt_order,
             'supplier'              => $req->supplier,
@@ -48,7 +73,7 @@ class PurchasingController extends Controller
             'amount'                => $req->po_amount,
             'currency'              => $req->currency,
             'terms'                 => $req->terms,
-            'expectedCompletionDate'=> $req->dt_completion,
+            'expectedCompletionDate' => $req->dt_completion,
             'expectedDeliveryDate'  => $req->date_needed,
             'status'                => 'OPEN',
             'addedBy'               => Auth::user()->domainAccount,
@@ -65,12 +90,12 @@ class PurchasingController extends Controller
             'addedDate'             => Carbon::now()
         ]);
 
-        if($add){
+        if ($add) {
 
             $this->audit($add->id);
 
-            if($req->delivery_term != 'consignment items'){
-                if($req->terms != 'credit'){
+            if ($req->delivery_term != 'consignment items') {
+                if ($req->terms != 'credit') {
 
                     foreach ($amounts as $key => $a) {
                         $temp_payments = new TempPaymentSchedule();
@@ -94,21 +119,21 @@ class PurchasingController extends Controller
                         $act_payments->addedDate = Carbon::today();
                         $act_payments->save();
                     }
-
-                } 
+                }
             }
 
             $notification = array(
-                'message' => 'Purchase Order has been created.', 
+                'message' => 'Purchase Order has been created.',
                 'alert-type' => 'success'
-            ); 
+            );
 
-            return redirect()->route('po.details',$add->id.'#files')->with('notification',$notification);
-        }     
+            return redirect()->route('po.details', $add->id . '#files')->with('notification', $notification);
+        }
     }
 
 
-    public function audit($id){
+    public function audit($id)
+    {
         AuditLogs::create([
             'ref_id' => $id,
             'poId' => $id,
@@ -121,17 +146,17 @@ class PurchasingController extends Controller
 
     public function editPO($id)
     {
-        $po = PO::where('id',$id)->first();
+        $po = PO::where('id', $id)->first();
         $supplier = supplier::all();
         $origin = DB::table('country_origin')->get();
 
 
-        return view('purchasing.edit',compact('po','supplier','origin'));
+        return view('purchasing.edit', compact('po', 'supplier', 'origin'));
     }
 
     public function updatePO(Request $req)
-    {   
-        PO::where('id',$req->id)->update([
+    {
+        PO::where('id', $req->id)->update([
             'poNumber' => $req->po_no,
             'orderDate' => $req->dt_order,
             'rq' => $req->rq,
@@ -155,20 +180,20 @@ class PurchasingController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'PO details has been updated.', 
+            'message' => 'PO details has been updated.',
             'alert-type' => 'success'
-        );  
-        
-        return back()->with('notification',$notification);
+        );
+
+        return back()->with('notification', $notification);
     }
 
-    public function checkDuplicatePO($id){
-        $po = PO::where('poNumber','=',$id)->first();
-        if($po === null) {
+    public function checkDuplicatePO($id)
+    {
+        $po = PO::where('poNumber', '=', $id)->first();
+        if ($po === null) {
             return 'none';
-        }
-        else{
-            return 'PO number already exist. Click <a href="/ims/po/details/'.$po->id.'">here</a> to view.';            
+        } else {
+            return 'PO number already exist. Click <a href="/ims/po/details/' . $po->id . '">here</a> to view.';
         }
     }
 
@@ -182,26 +207,44 @@ class PurchasingController extends Controller
 
     public function suppliers($param = null)
     {
+        $rolesPermissions = $this->roleRightService->hasPermissions("Manage Suppliers");
+
+        if (!$rolesPermissions['view']) {
+            abort(401);
+        }
+
+        $create = $rolesPermissions['create'];
+        $edit = $rolesPermissions['edit'];
+        $delete = $rolesPermissions['delete'];
+        $print = $rolesPermissions['print'];
+        $upload = $rolesPermissions['upload'];
+
         $collection = supplier::whereNotNull('id');
 
         $pageLimit = 10;
 
-        if(isset($param)){
+        if (isset($param)) {
 
-            if(isset($param['supplier'])){
-                $collection->where('name', 'like', "%".$param['supplier']."%");
+            if (isset($param['supplier'])) {
+                $collection->where('name', 'like', "%" . $param['supplier'] . "%");
             }
-
         } else {
 
             $param = [];
-            $collection->orderBy('id','desc');
-
+            $collection->orderBy('id', 'desc');
         }
 
         $collection = $collection->paginate($pageLimit);
-        
-        return view('purchasing.supplier',compact('collection','param'));
+
+        return view('purchasing.supplier', compact(
+            'collection',
+            'param',
+            'create',
+            'edit',
+            'delete',
+            'print',
+            'upload'
+        ));
     }
 
     public function supplier_create()
@@ -221,23 +264,23 @@ class PurchasingController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Supplier has been created.', 
+            'message' => 'Supplier has been created.',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('supplier.index')->with('notification',$notification);
+        return redirect()->route('supplier.index')->with('notification', $notification);
     }
 
     public function supplier_edit($id)
     {
-        $supplier = supplier::where('id',$id)->first();
+        $supplier = supplier::where('id', $id)->first();
 
-        return view('purchasing.supplier_edit',compact('supplier'));
+        return view('purchasing.supplier_edit', compact('supplier'));
     }
 
     public function supplier_update(Request $req)
     {
-        supplier::where('id',$req->id)->update([
+        supplier::where('id', $req->id)->update([
             'Supplier_Code' => $req->code,
             'name' => $req->name,
             'address' => $req->address,
@@ -247,18 +290,35 @@ class PurchasingController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Supplier details has been updated.', 
+            'message' => 'Supplier details has been updated.',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('supplier.index')->with('notification',$notification);
+        return redirect()->route('supplier.index')->with('notification', $notification);
     }
 
     public function kpi()
     {
-        $datas = PO::where('status','OPEN')->paginate(15);
+        $rolesPermissions = $this->roleRightService->hasPermissions("Purchasing KPI");
 
-        return view('purchasing.kpi',compact('datas'));
+        if (!$rolesPermissions['view']) {
+            abort(401);
+        }
+
+        $create = $rolesPermissions['create'];
+        $edit = $rolesPermissions['edit'];
+        $delete = $rolesPermissions['delete'];
+        $print = $rolesPermissions['print'];
+        $upload = $rolesPermissions['upload'];
+        $datas = PO::where('status', 'OPEN')->paginate(15);
+
+        return view('purchasing.kpi', compact(
+            'datas',
+            'create',
+            'edit',
+            'delete',
+            'print',
+            'upload'
+        ));
     }
-
 }

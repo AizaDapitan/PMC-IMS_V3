@@ -12,6 +12,7 @@ use DB;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Input;
+use App\Services\RoleRightService;
 
 //Models
 use App\PO;
@@ -24,26 +25,49 @@ use App\AuditLogs;
 
 class ProcessesController extends Controller
 {
-
-// MAIN PO
+    public function __construct(
+        RoleRightService $roleRightService
+    ) {
+        $this->roleRightService = $roleRightService;
+    }
+    // MAIN PO
     public function dashboard()
     {
-        $monthly_completion = PO::whereBetween('expectedCompletionDate',[Carbon::now()->startOfMonth(),Carbon::now()->endOfMonth()])
-            ->orderBy('expectedCompletionDate','asc')
+        $rolesPermissions = $this->roleRightService->hasPermissions("Dashboard");
+        if (!$rolesPermissions['view']) {
+            abort(401);
+        }
+
+        $create = $rolesPermissions['create'];
+        $edit = $rolesPermissions['edit'];
+        $delete = $rolesPermissions['delete'];
+        $print = $rolesPermissions['print'];
+        $upload = $rolesPermissions['upload'];
+
+        $monthly_completion = PO::whereBetween('expectedCompletionDate', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])
+            ->orderBy('expectedCompletionDate', 'asc')
             ->get();
 
-        $activities = AuditLogs::orderBy('id','desc')->get();
+        $activities = AuditLogs::orderBy('id', 'desc')->get();
 
-        return view('po.dashboard',compact('monthly_completion','activities'));
+        return view('po.dashboard', compact(
+            'monthly_completion',
+            'activities',
+            'create',
+            'edit',
+            'delete',
+            'print',
+            'upload'
+        ));
     }
 
     public function dashboard2()
     {
-        $monthly_completion = PO::whereBetween('expectedCompletionDate',[Carbon::now()->startOfMonth(),Carbon::now()->endOfMonth()])
-            ->orderBy('expectedCompletionDate','asc')
+        $monthly_completion = PO::whereBetween('expectedCompletionDate', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])
+            ->orderBy('expectedCompletionDate', 'asc')
             ->get();
 
-        return view('po.dashboard2',compact('monthly_completion'));
+        return view('po.dashboard2', compact('monthly_completion'));
     }
 
     public function search()
@@ -55,74 +79,93 @@ class ProcessesController extends Controller
 
     public function po_list($param = null)
     {
+        $rolesPermissions = $this->roleRightService->hasPermissions("PO List");
+
+        if (!$rolesPermissions['view']) {
+            abort(401);
+        }
+
+        $create = $rolesPermissions['create'];
+        $edit = $rolesPermissions['edit'];
+        $delete = $rolesPermissions['delete'];
+        $print = $rolesPermissions['print'];
+        $upload = $rolesPermissions['upload'];
+
         $collection = PO::whereNotNull('id');
 
         $pageLimit = 10;
 
-        if(isset($param)){
+        if (isset($param)) {
 
-            if(isset($param['poNumber'])){
+            if (isset($param['poNumber'])) {
                 $collection->where('poNumber', $param['poNumber']);
             }
 
-            if(isset($param['supplier'])){
+            if (isset($param['supplier'])) {
                 $collection->where('supplier', $param['supplier']);
             }
-
         } else {
 
             $param = [];
-            $collection->where('status','OPEN')->orderBy('id','desc');
-
+            $collection->where('status', 'OPEN')->orderBy('id', 'desc');
         }
 
         $collection = $collection->paginate($pageLimit);
         $suppliers = supplier::orderBy('name')->get();
-        
-        return view('po.list',compact('collection','param','suppliers'));
+
+        return view('po.list', compact(
+            'collection',
+            'param',
+            'suppliers',
+            'create',
+            'edit',
+            'delete',
+            'print',
+            'upload'
+        ));
     }
 
 
     public function details($id)
     {
-        $po = PO::where('id',$id)->first();
+        $po = PO::where('id', $id)->first();
 
-        $shipments   = logistics::where('poId',$id)->orderBy('expectedDeliveryDate','asc')->get();
-        $payments    = PaymentSchedule::where('poId',$id)->orderBy('paymentDate','asc')->get();
-        $deliveries  = drr::where('poNumber',$id)->orderBy('id','desc')->get();
+        $shipments   = logistics::where('poId', $id)->orderBy('expectedDeliveryDate', 'asc')->get();
+        $payments    = PaymentSchedule::where('poId', $id)->orderBy('paymentDate', 'asc')->get();
+        $deliveries  = drr::where('poNumber', $id)->orderBy('id', 'desc')->get();
 
         $total_payment    = count($payments);
         $total_shipment   = count($shipments);
-        $total_deliveries = count($deliveries); 
+        $total_deliveries = count($deliveries);
 
         // Files
         //$old_files = file_get_contents("http://172.16.20.27/ims_v3/migration/old_api.php?d=po&id=".$id);
         $old_files = '';
 
 
-        return view('po.details',compact('po','shipments','payments','deliveries','total_payment','total_shipment','total_deliveries','old_files'));
+        return view('po.details', compact('po', 'shipments', 'payments', 'deliveries', 'total_payment', 'total_shipment', 'total_deliveries', 'old_files'));
     }
 
     public function manual_delete_po(Request $req)
-    {   
+    {
         $data = PO::find($req->pid)->delete();
 
-        if($data){
-            PaymentSchedule::where('poId',$req->pid)->delete();
-            logistics::where('poId',$req->pid)->delete();
-            drr::where('poNumber',$req->pid)->delete();
+        if ($data) {
+            PaymentSchedule::where('poId', $req->pid)->delete();
+            logistics::where('poId', $req->pid)->delete();
+            drr::where('poNumber', $req->pid)->delete();
         }
 
         $notification = array(
-            'message' => 'PO details, payment schedule, shipment schedule and receiving report hase been deleted.', 
+            'message' => 'PO details, payment schedule, shipment schedule and receiving report hase been deleted.',
             'alert-type' => 'success'
         );
-            
-        return back()->with('notification',$notification);
+
+        return back()->with('notification', $notification);
     }
 
     public function manual_close_po(Request $req)
-    {   
+    {
         $data = PO::find($req->cid);
         $data->status = 'CLOSED';
         $data->closedDate = Carbon::now();
@@ -130,11 +173,11 @@ class ProcessesController extends Controller
         $data->save();
 
         $notification = array(
-            'message' => 'PO closed successfully.', 
+            'message' => 'PO closed successfully.',
             'alert-type' => 'success'
         );
-            
-        return back()->with('notification',$notification);
+
+        return back()->with('notification', $notification);
     }
 
     // public function manual_open_po(Request $req)
@@ -147,23 +190,23 @@ class ProcessesController extends Controller
     //         'message' => 'PO open successfully.', 
     //         'alert-type' => 'success'
     //     );
-            
+
     //     return back()->with('notification',$notification);
     // }
 
 
-############## FILES FUNCTIONS ##############
+    ############## FILES FUNCTIONS ##############
     public function preview_file(Request $req)
     {
         $today = date('Y-m-d', strtotime(Carbon::today()));
 
-        if(!Storage::exists('/public/'.$today)) {
-            
-            Storage::makeDirectory('/public/'.$today, 0775, true);
+        if (!Storage::exists('/public/' . $today)) {
+
+            Storage::makeDirectory('/public/' . $today, 0775, true);
         }
 
-        $dir = '\\\\ftp\\FTP\\APP_UPLOADED_FILES\\ims\\'.$req->po.'\\po\\'.$req->fileName;
-        $dst = storage_path().'/app/public/'.$today.'/'.$req->fileName;
+        $dir = '\\\\ftp\\FTP\\APP_UPLOADED_FILES\\ims\\' . $req->po . '\\po\\' . $req->fileName;
+        $dst = storage_path() . '/app/public/' . $today . '/' . $req->fileName;
 
         copy($dir, $dst);
     }
@@ -172,13 +215,13 @@ class ProcessesController extends Controller
     {
         $today = date('Y-m-d', strtotime(Carbon::today()));
 
-        if(!Storage::exists('/public/'.$today)) {
-            
-            Storage::makeDirectory('/public/'.$today, 0775, true);
+        if (!Storage::exists('/public/' . $today)) {
+
+            Storage::makeDirectory('/public/' . $today, 0775, true);
         }
 
-        $dir = '\\\\ftp\\FTP\\APP_UPLOADED_FILES\\ims\\'.$req->po.'\\mcd\\'.$req->did.'\\'.$req->fileName;
-        $dst = storage_path().'/app/public/'.$today.'/'.$req->fileName;
+        $dir = '\\\\ftp\\FTP\\APP_UPLOADED_FILES\\ims\\' . $req->po . '\\mcd\\' . $req->did . '\\' . $req->fileName;
+        $dst = storage_path() . '/app/public/' . $today . '/' . $req->fileName;
 
         copy($dir, $dst);
     }
@@ -186,18 +229,18 @@ class ProcessesController extends Controller
 
     public function upload(Request $req)
     {
-        if(($req->has('uploadFile'))) {
+        if (($req->has('uploadFile'))) {
             $files = $req->file('uploadFile');
-            $file_path = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\'.$req->po;
+            $file_path = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\' . $req->po;
 
-            if(!file_exists($file_path)) {
+            if (!file_exists($file_path)) {
 
                 mkdir($file_path, 0775, true);
-                mkdir($file_path.'\\po');
+                mkdir($file_path . '\\po');
 
-                $destinationPath = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\'.$req->po.'\\po';
+                $destinationPath = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\' . $req->po . '\\po';
             } else {
-                $destinationPath = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\'.$req->po.'\\po';
+                $destinationPath = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\' . $req->po . '\\po';
             }
 
             foreach ($files as $file) {
@@ -206,12 +249,12 @@ class ProcessesController extends Controller
         }
 
         $notification = array(
-            'message' => 'Files has been uploaded.', 
+            'message' => 'Files has been uploaded.',
             'alert-type' => 'success'
         );
-            
-        return back()->with('notification',$notification);
+
+        return back()->with('notification', $notification);
     }
-############## FILES FUNCTIONS ##############
+    ############## FILES FUNCTIONS ##############
 
 }

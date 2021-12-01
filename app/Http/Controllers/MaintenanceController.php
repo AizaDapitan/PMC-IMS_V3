@@ -18,6 +18,7 @@ use Faker\Test\Provider\en_ZA\CompanyTest;
 use App\Role;
 use Illuminate\Support\Facades\Session;
 use App\Notifications\EmailNotification;
+use App\Services\RoleRightService;
 
 class MaintenanceController extends Controller
 {
@@ -27,16 +28,45 @@ class MaintenanceController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct(
+        RoleRightService $roleRightService
+    ) {
+        $this->roleRightService = $roleRightService;
+    }
     public function user_index()
     {
-        $users = users::where([['id', '>', 5],['isActive', '=', 1]])->orderBy('id', 'desc')->paginate(10);
 
-        return view('maintenance.users', compact('users'));
+        $rolesPermissions = $this->roleRightService->hasPermissions("Users Maintenance");
+
+        if (!$rolesPermissions['view']) {
+            abort(401);
+        }
+
+        $create = $rolesPermissions['create'];
+        $edit = $rolesPermissions['edit'];
+        $delete = $rolesPermissions['delete'];
+        $print = $rolesPermissions['print'];
+        $upload = $rolesPermissions['upload'];
+
+        $users = users::where([['id', '>', 5], ['isActive', '=', 1]])->orderBy('id', 'desc')->paginate(10);
+
+        return view('maintenance.users', compact(
+            'users',
+            'create',
+            'edit',
+            'delete',
+            'print',
+            'upload'
+        ));
     }
 
     public function user_create()
     {
+        $rolesPermissions = $this->roleRightService->hasPermissions("Users Maintenance");
 
+        if (!$rolesPermissions['create']) {
+            abort(401);
+        }
         $roles = Role::where('active', '1')->get();
         return view('maintenance.user_create', compact(
             'roles'
@@ -71,8 +101,8 @@ class MaintenanceController extends Controller
             'role'          => $role,
             'dept'          => $employee[1],
             'access_rights' => $modules,
-            'role_id'        =>$req->roleid,
-            'email'         =>$req->email,    
+            'role_id'        => $req->roleid,
+            'email'         => $req->email,
             'remember_token' => str_random(10)
         ]);
 
@@ -89,6 +119,11 @@ class MaintenanceController extends Controller
     }
     public function user_edit(Request $request, $id)
     {
+        $rolesPermissions = $this->roleRightService->hasPermissions("Users Maintenance");
+
+        if (!$rolesPermissions['edit']) {
+            abort(401);
+        }
         $user = users::find($id);
         $roles = Role::where('active', '1')->get();
         return view('maintenance.user_edit', compact(
@@ -109,7 +144,7 @@ class MaintenanceController extends Controller
             $values .= $module . '|';
             $modules = rtrim($values, '|');
         }
-        
+
         $roleArr = Role::find($r->input('role_id'));
         $role = $roleArr['name'];
         $user = users::find($r->uid)->update([
@@ -147,7 +182,7 @@ class MaintenanceController extends Controller
         );
 
         return redirect()->route('users.index')->with('notification', $notification);
-        
+
         return redirect()->back();
     }
 
@@ -194,27 +229,26 @@ class MaintenanceController extends Controller
 
         $req->validate([
 
-            'current'           => 'required|string',
-            'password_new' 	    => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&._]/'
+            'password_new' => [
+                'required', 'string', 'min:8', 'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&._]/'
+            ],
+            'confirm_password'  => 'same:password_new'
         ]);
-      
-        if($req->password_new == $req->confirm_password)
-        {
-            if (Hash::check($req->current, $user->password)) 
-            {            
-                $user->update(['password'  => Hash::make($req->password_new, array('rounds' => 12))]);           
-    
+
+        if ($req->password_new == $req->confirm_password) {
+            if (Hash::check($req->current, $user->password)) {
+                $user->update(['password'  => Hash::make($req->password_new, array('rounds' => 12))]);
+
                 \Auth::logout();
-                return redirect('/ims/login');    
-            } 
-            else 
-            {
-                return back()->with('error', 'Something is wrong while trying to change the password');    
-            }  
-        }
-        else
-        {
+                return redirect('/ims/login');
+            } else {
+                return back()->with('error', 'Something is wrong while trying to change the password');
+            }
+        } else {
             return back()->with('error', 'Something is wrong while trying to change the password');
-        }                                           
+        }
     }
 }

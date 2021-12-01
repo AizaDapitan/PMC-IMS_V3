@@ -31,15 +31,13 @@ class RoleRightController extends Controller
         $permissions = $this->permissionService->all()->where('active', '1')->sortBy('description');
         $modules = $this->permissionService->getModule()->sortBy('description');
 
-        //   $rolesPermissions = $this->roleRightService->hasPermissions("Role Rights");
+          $rolesPermissions = $this->roleRightService->hasPermissions("Role Rights");
     
-        //     if (!$rolesPermissions['view']) {
-        //         abort(401);
-        //     }
+            if (!$rolesPermissions['view']) {
+                abort(401);
+            }
     
-        //     $create = $rolesPermissions['create'];
-
-        $create = true;
+            $create = $rolesPermissions['create'];
 
         return view('maintenance.roleaccessrights', compact(
             'roles',

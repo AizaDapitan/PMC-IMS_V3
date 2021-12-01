@@ -67,13 +67,17 @@
                                                 <button disabled href="{{ route('create.drr',['waybill' => str_replace('/','qwjz',$data->waybill), 'po' => $data->po_details->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Process DRR</button>
                                                 @endif
                                                 @if(Auth::user()->domainAccount == 'dtablante')
-                                                @if($edit)
-                                                    &nbsp;<a href="{{env('APP_URL')}}/ims/payment-schedule/edit/{{$data->po_details->id}}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Update Payments</a>
-                                                    
+<<<<<<< HEAD
+                                                    @if($edit)
+                                                    &nbsp;<a href="/ims/payment-schedule/edit/{{$data->po_details->id}}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Update Payments</a>
                                                     @else
                                                     &nbsp;<button disabled href="/ims/payment-schedule/edit/{{$data->po_details->id}}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Update Payments</button>
                                                    @endif
                                                     @endif
+=======
+                                                    &nbsp;<a href="{{env('APP_URL')}}/ims/payment-schedule/edit/{{$data->po_details->id}}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Update Payments</a>
+                                                @endif
+>>>>>>> 8da9affbec8ff5749bdd0a027ec1d21754a0fa65
                                             </td>
                                         </tr>
                                     @endif

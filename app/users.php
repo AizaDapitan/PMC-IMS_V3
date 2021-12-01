@@ -100,8 +100,8 @@ class users extends Authenticatable implements AuditableContract, UserResolver
 
     public static function employee_lookup()
     {
-        // $employees = file_get_contents("http://172.16.20.27/ims_v3/api/hris-api.php");
-        $employees = file_get_contents("http://localhost/api/hris-api.php");
+        $employees = file_get_contents("http://172.16.20.27/ims_v3/api/hris-api.php");
+        // $employees = file_get_contents("http://localhost/api/hris-api.php");
 
 
         return $employees;

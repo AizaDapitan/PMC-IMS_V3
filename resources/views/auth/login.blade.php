@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <title></title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -8,16 +9,21 @@
 
     <style>
         @charset "utf-8";
-        @import url//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+        @import url //maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
 
-        div.main{
-            background: -webkit-radial-gradient(center, ellipse cover,  #009FFD 1%,#2A2A72 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-radial-gradient(center, ellipse cover,  #009FFD 1%,#2A2A72 100%); /* Opera 12+ */
-            background: -ms-radial-gradient(center, ellipse cover,  #009FFD 1%,#2A2A72 100%); /* IE10+ */
-            background: radial-gradient(ellipse at center,  #009FFD 1%,#2A2A72 100%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0264d6', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-            height:calc(100vh);
-            width:100%;
+        div.main {
+            background: -webkit-radial-gradient(center, ellipse cover, #009FFD 1%, #2A2A72 100%);
+            /* Chrome10+,Safari5.1+ */
+            background: -o-radial-gradient(center, ellipse cover, #009FFD 1%, #2A2A72 100%);
+            /* Opera 12+ */
+            background: -ms-radial-gradient(center, ellipse cover, #009FFD 1%, #2A2A72 100%);
+            /* IE10+ */
+            background: radial-gradient(ellipse at center, #009FFD 1%, #2A2A72 100%);
+            /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0264d6', endColorstr='#1c2b5a', GradientType=1);
+            /* IE6-9 fallback on horizontal gradient */
+            height: calc(100vh);
+            width: 100%;
         }
 
         [class*="fontawesome-"]:before {
@@ -28,7 +34,7 @@
 
         * {
             box-sizing: border-box;
-            margin:0px auto;
+            margin: 0px auto;
 
             &:before,
             &:after {
@@ -90,21 +96,25 @@
 
         /* ---------- LOGIN ---------- */
 
-        #login form{
+        #login form {
             width: 250px;
         }
-        #login, .logo{
-            display:inline-block;
-            width:40%;
+
+        #login,
+        .logo {
+            display: inline-block;
+            width: 40%;
         }
-        #login{
-            border-right:1px solid #fff;
+
+        #login {
+            border-right: 1px solid #fff;
             padding: 0px 22px;
             width: 59%;
         }
-        .logo{
-            color:#fff;
-            font-size:50px;
+
+        .logo {
+            color: #fff;
+            font-size: 50px;
             line-height: 125px;
         }
 
@@ -115,7 +125,7 @@
             display: block;
             float: left;
             height: 50px;
-            font-size:24px;
+            font-size: 24px;
             line-height: 50px;
             text-align: center;
             width: 50px;
@@ -124,13 +134,16 @@
         #login form input {
             height: 50px;
         }
-        fieldset{
-            padding:0;
-            border:0;
+
+        fieldset {
+            padding: 0;
+            border: 0;
             margin: 0;
 
         }
-        #login form input[type="text"], input[type="password"] {
+
+        #login form input[type="text"],
+        input[type="password"] {
             background-color: #fff;
             border-radius: 0px 3px 3px 0px;
             color: #000;
@@ -156,13 +169,14 @@
             background-color: #d44179;
         }
 
-        #login > p {
+        #login>p {
             text-align: center;
         }
 
-        #login > p span {
+        #login>p span {
             padding-left: 5px;
         }
+
         .middle {
             display: flex;
             width: 600px;
@@ -178,9 +192,25 @@
                     <div id="login">
                         <form autocomplete="off" action="{{ url('/ims/checklogin') }}" method="post">
                             @csrf
+                            @if($message = Session::get('error'))
+                            <div class="alert alert-danger" role="alert">
+                                <i data-feather="alert-circle" class="mg-r-10"></i> {{ $message }}
+                            </div>
+                            @endif
+
+                            @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <button class="close" data-close="alert"></button>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                             <fieldset class="clearfix">
-                                <p ><span class="fa fa-user"></span><input type="text" name="domainAccount" placeholder="Domain" required></p>
-                                <p><span class="fa fa-lock"></span><input type="password" name="password"  placeholder="Password" required></p>
+                                <p><span class="fa fa-user"></span><input type="text" name="domainAccount" placeholder="Domain" required></p>
+                                <p><span class="fa fa-lock"></span><input type="password" name="password" placeholder="Password" required></p>
 
                                 <div>
                                     <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">&copy; {{ date('Y') }} PHILSAGA MINING CORPORATION</a></span>
@@ -203,7 +233,5 @@
         </div>
     </div>
 </body>
+
 </html>
-
-
-

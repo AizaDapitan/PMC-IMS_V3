@@ -76,11 +76,15 @@
                                         <td>{{$supplier->Contact_Person}}</td>
                                         <td>{{$supplier->LTO_validity}}</td>
                                         <td>
-                                        @if($edit)
-                                            <a href="{{env('APP_URL')}}/ims/supplier/edit/{{$supplier->id}}" class="btn btn-sm blue">Edit</a                                           
+<<<<<<< HEAD
+                                            @if($edit)
+                                            <a href="/ims/supplier/edit/{{$supplier->id}}" class="btn btn-sm blue">Edit</a>
                                             @else
                                             <button disabled href="/ims/supplier/edit/{{$supplier->id}}" class="btn btn-sm blue">Edit</button>
                                             @endif
+=======
+                                            <a href="{{env('APP_URL')}}/ims/supplier/edit/{{$supplier->id}}" class="btn btn-sm blue">Edit</a>
+>>>>>>> 8da9affbec8ff5749bdd0a027ec1d21754a0fa65
                                         </td>
                                     </tr>
                                 @endforeach

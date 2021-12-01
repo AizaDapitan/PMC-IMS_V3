@@ -35,7 +35,11 @@
                         <i class="fa fa-list font-blue-hoki"></i>
                         <span class="caption-subject font-blue-hoki bold uppercase"> List Of Recipients</span>
                     </div>
+                    @if($create)
                     <a href="{{ route('email-recipients.create') }}" class="btn btn-info pull-right">Add Recipient</a>
+                    @else
+                    <button disabled href="{{ route('email-recipients.create') }}" class="btn btn-info pull-right">Add Recipient</button>
+                    @endif
                 </div>
                 <br>
                 <table class="user_tbl table table-hover">
@@ -50,8 +54,16 @@
                                 <td> {{$recipient->name}} </td>
                                 <td> {{$recipient->email}} </td>
                                 <td> 
-                                    <a href="{{ route('email-recipients.edit', $recipient->id) }}" class="btn btn-primary"> Edit </a> 
+                                    @if($edit)
+                                    <a href="{{ route('email-recipients.edit', $recipient->id) }}" class="btn btn-primary"> Edit </a>
+                                    @else
+                                    <button disabled href="{{ route('email-recipients.edit', $recipient->id) }}" class="btn btn-primary"> Edit </button>
+                                    @endif
+                                    @if($delete)
                                     <a href="#" id="deleteBtn" data-id="{{ $recipient->id }}" class="btn btn-danger"> Delete </a>  
+                                    @else
+                                    <button disabled href="#" id="deleteBtn" data-id="{{ $recipient->id }}" class="btn btn-danger"> Delete </button>  
+                                    @endif
                                 </td>
                             </tr>
                         @empty

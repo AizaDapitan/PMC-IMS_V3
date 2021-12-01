@@ -6,24 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Permission;
 use App\Module;
+use App\Services\RoleRightService;
 
 class PermissionController extends Controller 
 {
 
+    public function __construct(
+        RoleRightService $roleRightService
+    ) {
+        $this->roleRightService = $roleRightService;
+    }
 	public function index() 
     {
         
-        //$rolesPermissions = $this->roleRightService->hasPermissions("Permissions Maintenance");
+        $rolesPermissions = $this->roleRightService->hasPermissions("Permissions Maintenance");
 
-        //if (!$rolesPermissions['view']) {
-        //    abort(401);
-        //}
+        if (!$rolesPermissions['view']) {
+           abort(401);
+        }
 
-        //$create = $rolesPermissions['create'];
-        //$edit = $rolesPermissions['edit'];
-
-        $create = true;
-        $edit = true;        
+        $create = $rolesPermissions['create'];
+        $edit = $rolesPermissions['edit'];
+  
 
 		$permissions = Permission::orderBy('module_type')
         ->orderBy('description')

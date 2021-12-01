@@ -43,15 +43,14 @@ class UserRightController extends Controller
         $modules = $this->permissionService->getModule()->sortBy('description');
 
 
-        // $rolesPermissions = $this->roleRightService->hasPermissions("User Rights");
+        $rolesPermissions = $this->roleRightService->hasPermissions("User Rights");
 
-        // if (!$rolesPermissions['view']) {
-        //     abort(401);
-        // }
+        if (!$rolesPermissions['view']) {
+            abort(401);
+        }
 
-        // $create = $rolesPermissions['create'];
+        $create = $rolesPermissions['create'];
 
-        $create = true;
 
         return view('maintenance.useraccessrights', compact(
             'users',

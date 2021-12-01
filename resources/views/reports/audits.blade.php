@@ -3,6 +3,9 @@
     <link href="{{env('APP_URL')}}/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
     <link href="{{env('APP_URL')}}/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="{{env('APP_URL')}}/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ url('plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    
 @endsection
 @section('content')
 
@@ -143,6 +146,11 @@
 
     <script src="{{env('APP_URL')}}/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
     <script src="{{env('APP_URL')}}/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+  
+  <script src="{{ url('plugins/datatables/datatable.js') }}" type="text/javascript"></script>
+  <script src="{{ url('plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
+  
+  <script src="{{ url('plugins/datatables/table-datatables-buttons.js') }}" type="text/javascript"></script>
 
 <script type="text/javascript">
     function getReportDetails() {

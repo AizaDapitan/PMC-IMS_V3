@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Role;
+use App\Services\RoleRightService;
 
 
 class RoleController extends Controller 
 {
 
+    public function __construct(
+        RoleRightService $roleRightService
+    ) {
+        $this->roleRightService = $roleRightService;
+    }
 	public function index() 
     {
         
-        // $rolesPermissions = $this->roleRightService->hasPermissions("Roles Maintenance");
+        $rolesPermissions = $this->roleRightService->hasPermissions("Roles Maintenance");
 
-        // if (!$rolesPermissions['view']) {
-        //     abort(401);
-        // }
+        if (!$rolesPermissions['view']) {
+            abort(401);
+        }
 
-        //$create = $rolesPermissions['create'];
-        //$edit = $rolesPermissions['edit'];
-
-        $create = true;
-        $edit = true;        
+        $create = $rolesPermissions['create'];
+        $edit = $rolesPermissions['edit'];
 
 		$roles = Role::orderBy('name')->get();
 		return view('roles.index', compact('roles', 'create', 'edit'));

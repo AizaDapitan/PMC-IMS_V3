@@ -13,7 +13,7 @@
 <div class="page-content">
     <!-- BEGIN BREADCRUMBS -->
     <div class="breadcrumbs">
-        <h1>PO Summary List</h1>
+        <h1>PO Summary List</h1>x
         <ol class="breadcrumb">
             <li>
                 <a href="{{ route('ims.dashboard') }}">Dashboard</a>
@@ -118,8 +118,14 @@
                                         <td id="btn{{ $data->id }}">
                                             @if($data->status == 'OPEN')
                                                 <div class="btn-toolbar margin-bottom-2">
-                                                    <div class="btn-group btn-group-sm btn-group-solid">                                                        
+<<<<<<< HEAD
+                                                    <div class="btn-group btn-group-sm btn-group-solid">
+                                                        <!-- <a target="_blank" href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details"> -->
                                                         @if($edit)
+=======
+                                                    <div class="btn-group btn-group-sm btn-group-solid">                                                        
+
+>>>>>>> 8da9affbec8ff5749bdd0a027ec1d21754a0fa65
                                                         <a href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details">
                                                         @else
                                                         <button disabled href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details">
@@ -228,8 +234,14 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                            @else                                                
+<<<<<<< HEAD
+                                            @else
+                                                <!-- <a target="_blank" href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Summary"><i class="fa fa-eye"></i></a> -->
                                                 @if($edit)
+=======
+                                            @else                                                
+
+>>>>>>> 8da9affbec8ff5749bdd0a027ec1d21754a0fa65
                                                 <a href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Summary"><i class="fa fa-eye"></i></a>
                                                 @else
                                                 <button disabled href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Summary"><i class="fa fa-eye"></i></button>

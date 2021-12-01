@@ -62,7 +62,11 @@
                         <i class="fa fa-list font-blue-hoki"></i>
                         <span class="caption-subject font-blue-hoki bold uppercase"> List Of Users</span>
                     </div>
+                    @if($create)
                     <a href="{{ route('user.create') }}" class="btn btn-info pull-right">Create User</a>
+                    @else
+                    <button disabled href="{{ route('user.create') }}" class="btn btn-info pull-right">Create User</button>
+                     @endif
                 </div>
                 <br>
                 <table class="user_tbl table table-hover">
@@ -85,18 +89,30 @@
                             <td>
                                 <div class="btn-toolbar margin-bottom-2">
                                     <div class="btn-group btn-group-sm btn-group-solid">
+                                        @if($edit)
                                         <a href="{{ route('user.edit', $u->id) }}" class="btn btn-sm btn-primary button">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                        @else
+                                        <button disabled href="{{ route('user.edit', $u->id) }}" class="btn btn-sm btn-primary button">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        @endif
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="btn-toolbar margin-bottom-2">
                                     <div class="btn-group btn-group-sm btn-group-solid">
+                                        @if($delete)
                                         <a data-toggle="modal" href="#remove{{$u->id}}" data-uid="{{ $u->id }}" class="btn btn-sm btn-danger button">
                                             <i class="fa fa-trash"></i>
                                         </a>
+                                        @else
+                                        <button disabled data-toggle="modal" href="#remove{{$u->id}}" data-uid="{{ $u->id }}" class="btn btn-sm btn-danger button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                        @endif
                                     </div>
                                     <div class="modal fade" id="remove{{$u->id}}" tabindex="-1" role="basic"  aria-hidden="true">
                                         <div class="modal-dialog">

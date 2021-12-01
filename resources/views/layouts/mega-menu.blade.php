@@ -11,7 +11,7 @@
                 <a style="background: #00539CFF;color: #FFD662FF;" href="{{ route('ims.dashboard') }}" class="text-uppercase">IMS v3 </a>
             </li>
             <!-- active open selected -->
-            <li class="dropdown dropdown-fw dropdown-fw-disabled">
+            <li class="dropdown dropdown-fw dropdown-fw-disabled active">
                 <a href="{{ route('po.list') }}" class="text-uppercase"><i class="icon-layers"></i> PO List </a>
             </li>
             

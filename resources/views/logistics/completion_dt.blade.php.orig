@@ -61,8 +61,13 @@
                                         <td>{{ \App\logistics::shipment_status($data->id) }} SHIPPED</td>
                                         <td>{{ \App\PO::deliveryProgress($data->qty,$data->id) }}% DELIVERED</td>
                                         <td>{{ $data->status }}</td>
-                                        <td>                                            
+<<<<<<< HEAD
+                                        <td>
                                             @if($edit)
+                                            <!-- <a href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple"><i class="fa fa-eye"></i></a> -->                                            
+=======
+                                        <td>                                            
+>>>>>>> 8da9affbec8ff5749bdd0a027ec1d21754a0fa65
                                             <a href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple"><i class="fa fa-eye"></i></a>
                                             @else
                                             <button disabled href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple"><i class="fa fa-eye"></i></button>

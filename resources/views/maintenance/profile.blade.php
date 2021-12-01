@@ -64,7 +64,9 @@
                                     </li>
                                 </ul>
                             </div>
-
+                            @foreach ($errors->all() as $error)
+                                <p class="text-warning">{{ $error }}</p>
+                             @endforeach 
                             @if(Session::has('success'))
 
                             <script>

@@ -96,7 +96,12 @@
                                         <td>
                                             <div class="btn-toolbar margin-bottom-2">
                                                 <div class="btn-group btn-group-sm btn-group-solid">
+<<<<<<< HEAD
+                                                    <!-- <a href="/ims/po/details/{{$payment->poId}}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details"> -->
                                                     @if($edit)
+=======
+
+>>>>>>> 8da9affbec8ff5749bdd0a027ec1d21754a0fa65
                                                     <a href="{{env('APP_URL')}}/ims/po/details/{{$payment->poId}}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details">                                                    
                                                         <i class="fa fa-eye"></i>
                                                     </a>

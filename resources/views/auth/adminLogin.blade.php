@@ -192,6 +192,22 @@
                     <div id="login">
                         <form autocomplete="off" action="{{route('login.adminsubmit')}}" method="post">
                             @csrf
+                            @if($message = Session::get('error'))
+                            <div class="alert alert-danger" role="alert">
+                                <i data-feather="alert-circle" class="mg-r-10"></i> {{ $message }}
+                            </div>
+                            @endif
+
+                            @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <button class="close" data-close="alert"></button>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                             <fieldset class="clearfix">
                                 <p><span class="fa fa-user"></span><input type="text" name="domainAccount" placeholder="Domain" required></p>
                                 <p><span class="fa fa-lock"></span><input type="password" name="password" placeholder="Password" required></p>

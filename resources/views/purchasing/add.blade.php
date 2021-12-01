@@ -239,8 +239,13 @@
 
                         <div class="form-actions right">
                             <a href="{{ route('po.list') }}" class="btn default">Cancel</a>
+                            @if($create)
                             <button type="submit" class="btn blue">
                                 <i class="fa fa-check"></i> Save</button>
+                            @else
+                            <button disabled type="submit" class="btn blue">
+                                <i class="fa fa-check"></i> Save</button>
+                            @endif
                         </div>
                     </form>
                 </div>
