@@ -15,7 +15,7 @@
                 <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
-                <a href="/ims/purchasing">Purchasing</a>
+                <a href="{{env('APP_URL')}}/ims/purchasing">Purchasing</a>
             </li>
             <li class="active">Suppliers</li>
         </ol>
@@ -72,7 +72,7 @@
                                         <td>{{$supplier->Contact_Person}}</td>
                                         <td>{{$supplier->LTO_validity}}</td>
                                         <td>
-                                            <a href="/ims/supplier/edit/{{$supplier->id}}" class="btn btn-sm blue">Edit</a>
+                                            <a href="{{env('APP_URL')}}/ims/supplier/edit/{{$supplier->id}}" class="btn btn-sm blue">Edit</a>
                                         </td>
                                     </tr>
                                 @endforeach

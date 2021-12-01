@@ -16,7 +16,7 @@
                 <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
-                <a href="/ims/purchasing">MCD</a>
+                <a href="{{env('APP_URL')}}/ims/purchasing">MCD</a>
             </li>
             <li class="active">Create DRR</li>
         </ol>

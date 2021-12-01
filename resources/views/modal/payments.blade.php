@@ -7,7 +7,9 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" method="post" action="/mark_as_paid" enctype="multipart/form-data">
+                <!-- <form class="form-horizontal" role="form" method="post" action="/mark_as_paid" enctype="multipart/form-data"> -->
+
+                <form id="form" class="form-horizontal" action="{{ route('modal.payments.mark_as_paid') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input id="poid" name="poid" type="hidden">
                     <input id="pon" name="pon" type="hidden">

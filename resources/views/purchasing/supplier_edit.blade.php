@@ -11,7 +11,7 @@
                 <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
-                <a href="/ims/purchasing">Purchasing</a>
+                <a href="{{env('APP_URL')}}/ims/purchasing">Purchasing</a>
             </li>
             <li class="active">Update Supplier</li>
         </ol>
@@ -79,7 +79,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Address <i class="font-red">*</i></label>
-                                        <textarea name="address" id="" cols="30" rows="2" class="form-control input-lg" required maxlength="50" placeholder="Address">{{$supplier->address}}</textarea>
+                                        <textarea name="address" id="" cols="30" rows="2" class="form-control input-lg" required maxlength="200" placeholder="Address">{{$supplier->address}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn blue pull-right"><i class="fa fa-save"></i> Save Changes</button>
-                                    <a href="/ims/supplier" style="margin-right: 5px;" class="btn btn-default pull-right">Cancel</a>
+                                    <a href="{{env('APP_URL')}}/ims/supplier" style="margin-right: 5px;" class="btn btn-default pull-right">Cancel</a>
                                 </div>
                             </div>
                         </div>

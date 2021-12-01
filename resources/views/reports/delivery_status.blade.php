@@ -109,8 +109,7 @@
 
                                 @forelse($shipments as $shipment)
                                     <tr>
-                                        <td>{{ $row++ }}</td>
-                                        <!-- <td><a target="_blank" href="/ims/po/details/{{$shipment->po_details->id}}">{{ $shipment->po_details->poNumber }}</a></td> -->
+                                        <td>{{ $row++ }}</td>                                        
 
                                         <td><a href="{{env('APP_URL')}}/ims/po/details/{{$shipment->po_details->id}}">{{ $shipment->po_details->poNumber }}</a></td>
 

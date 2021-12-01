@@ -43,7 +43,11 @@ Route::group(['middleware' => ['authenticated']], function () {
 	Route::get('/ims/accounting/overdue','AccountingController@overdue')->name('accounting.overdue-payments');
 
 
-	Route::post('/mark_as_paid','AccountingController@mark_as_paid');
+	//Route::post('/mark_as_paid','AccountingController@mark_as_paid');
+
+	Route::post('/ims/mark_as_paid', 'AccountingController@mark_as_paid')->name('modal.payments.mark_as_paid');
+	Route::get('/ims/mark_as_paid', 'AccountingController@mark_as_paid')->name('modal.payments.mark_as_paid');
+
 	Route::get('/ims/payment-schedule/edit/{id}','AccountingController@edit');
 	Route::post('/delete-payment','AccountingController@destroy')->name('payment.delete');
 

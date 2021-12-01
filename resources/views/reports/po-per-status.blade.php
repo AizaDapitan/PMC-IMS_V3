@@ -78,8 +78,7 @@
                                 @forelse($purchases as $purchase)
                                     <tr>
                                         <td>{{ $row++ }}</td>
-                                        <!-- <td><a target="_blank" href="/ims/po/details/{{$purchase->id}}">{{ $purchase->poNumber }}</a></td> -->
-
+                                        
                                         <td><a href="{{env('APP_URL')}}/ims/po/details/{{$purchase->id}}">{{ $purchase->poNumber }}</a></td>
 
                                         <td>{{ $purchase->supplier_name->name }}</td>

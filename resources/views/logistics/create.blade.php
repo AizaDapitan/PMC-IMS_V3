@@ -16,7 +16,7 @@
                 <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
-                <a href="/ims/purchasing">Purchasing</a>
+                <a href="{{env('APP_URL')}}/ims/purchasing">Purchasing</a>
             </li>
             <li class="active">Create Schedule</li>
         </ol>
@@ -95,7 +95,7 @@
 
                 $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added">'+
                     '<td>'+
-                        '<input style="width: 100%;" name="dates[]" class="form-control form-control-inline datepicker" type="text" placeholder="From">'+
+                        '<input style="width: 100%;" name="dates[]" class="form-control form-control-inline datepicker" type="text" placeholder="From" required>'+
                     '</td>'+
                     '<td>'+
                     '<button type="button" name="remove" id="'+i+'" class="btn btn-sm btn-danger btn_remove">X</button>'+

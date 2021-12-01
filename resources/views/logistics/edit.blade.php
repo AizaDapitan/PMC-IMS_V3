@@ -16,7 +16,7 @@
                 <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
-                <a href="/ims/logistics">Logistics</a>
+                <a href="{{env('APP_URL')}}/ims/logistics">Logistics</a>
             </li>
             <li class="active">Update Shipment Schedule</li>
         </ol>

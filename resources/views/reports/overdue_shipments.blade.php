@@ -70,8 +70,7 @@
                                 @forelse($collection as $data)
                                     <tr>
                                         <td>{{ $row++ }}</td>
-                                        <!-- <td><a target="_blank" href="/ims/po/details/{{$data->po_details->id}}">{{ $data->po_details->poNumber }}</a></td> -->
-
+                                        
                                         <td><a href="{{env('APP_URL')}}/ims/po/details/{{$data->po_details->id}}">{{ $data->po_details->poNumber }}</a></td>
 
                                         <td>{{ $data->po_details->supplier_name->name }}</td>

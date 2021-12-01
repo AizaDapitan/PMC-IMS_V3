@@ -53,7 +53,7 @@
                                         @php $l++; @endphp
                                         <tr>
                                             <td>{{ $l }}</td>
-                                            <td><a target="_blank" href="/ims/po/details/{{ $data->po_details->id }}">{{ $data->po_details->poNumber }}</a></td>
+                                            <td><a target="_blank" href="{{env('APP_URL')}}/ims/po/details/{{ $data->po_details->id }}">{{ $data->po_details->poNumber }}</a></td>
                                             <td class="text-uppercase">{{ $data->po_details->supplier_name->name }}</td>
                                             <td>{{ $data->waybill }}</td>
                                             <td>{{ $data->po_details->incoterms }}</td>
@@ -63,7 +63,7 @@
                                             <td>
                                                 <a href="{{ route('create.drr',['waybill' => str_replace('/','qwjz',$data->waybill), 'po' => $data->po_details->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Process DRR</a>
                                                 @if(Auth::user()->domainAccount == 'dtablante')
-                                                    &nbsp;<a href="/ims/payment-schedule/edit/{{$data->po_details->id}}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Update Payments</a>
+                                                    &nbsp;<a href="{{env('APP_URL')}}/ims/payment-schedule/edit/{{$data->po_details->id}}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Update Payments</a>
                                                 @endif
                                             </td>
                                         </tr>

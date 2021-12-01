@@ -10,17 +10,17 @@
         <td>{!! \App\PaymentSchedule::is_paid($payment->isPaid) !!}</td>
         <td>
             @if($payment->isPaid == 1)
-                <a href="/ims/po/details/{{$payment->poId}}" class="btn btn-sm purple"><i class="fa fa-eye"></i></a>
+                <a href="{{env('APP_URL')}}/ims/po/details/{{$payment->poId}}" class="btn btn-sm purple"><i class="fa fa-eye"></i></a>
             @else
                 <div class="btn-toolbar margin-bottom-2">
                     <div class="btn-group btn-group-sm btn-group-solid">
                         <a href="#paidModal" data-toggle="modal" data-amount="{{number_format($payment->amount,2)}}" data-poid="{{$payment->poId}}" data-ppid="{{ $payment->id }}" data-pon="{{ $payment->poNumber }}" class="paid btn btn-sm btn-danger">
                             <i class="icon-check"></i>
                         </a>
-                        <a href="/ims/payment/edit/{{$payment->id}}" class="btn btn-sm btn-primary">
+                        <a href="{{env('APP_URL')}}/ims/payment/edit/{{$payment->id}}" class="btn btn-sm btn-primary">
                             <i class="fa fa-edit"></i>
                         </a>
-                        <a href="/ims/po/details/{{$payment->poId}}" class="btn btn-sm purple">
+                        <a href="{{env('APP_URL')}}/ims/po/details/{{$payment->poId}}" class="btn btn-sm purple">
                             <i class="fa fa-eye"></i>
                         </a>
                     </div>

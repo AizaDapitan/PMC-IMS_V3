@@ -118,8 +118,7 @@
                                         <td id="btn{{ $data->id }}">
                                             @if($data->status == 'OPEN')
                                                 <div class="btn-toolbar margin-bottom-2">
-                                                    <div class="btn-group btn-group-sm btn-group-solid">
-                                                        <!-- <a target="_blank" href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details"> -->
+                                                    <div class="btn-group btn-group-sm btn-group-solid">                                                        
 
                                                         <a href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Details">
 
@@ -176,8 +175,7 @@
                                                         
                                                     </div>
                                                 </div>
-                                            @else
-                                                <!-- <a target="_blank" href="/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Summary"><i class="fa fa-eye"></i></a> -->
+                                            @else                                                
 
                                                 <a href="{{env('APP_URL')}}/ims/po/details/{{ $data->id }}" class="btn btn-sm purple tooltips" data-container="body" data-placement="top" data-original-title="View PO Summary"><i class="fa fa-eye"></i></a>
                                             @endif

@@ -62,6 +62,10 @@
                     </div>
                 </div>                  
 
+                <br>
+                <br> 
+                <br> 
+
                 @if(session('errorMesssage'))
                     <div id="errdiv" class="alert alert-danger alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
@@ -78,7 +82,7 @@
                 @endif
                                 
                 <br>
-                <table class="user_tbl table table-hover">
+                <table class="user_tbl table table-hover" id="sample_101">
                     <thead>
                         <th>Scheduled Date</th>
                         <th>Scheduled Time</th>

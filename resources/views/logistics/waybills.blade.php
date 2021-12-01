@@ -17,7 +17,7 @@
                 <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
-                <a href="/ims/logistics">Logistics</a>
+                <a href="{{env('APP_URL')}}/ims/logistics">Logistics</a>
             </li>
             <li class="active">Shipments</li>
         </ol>
@@ -28,7 +28,7 @@
         <div class="col-md-12">
             <a href="{{ route('po.list') }}" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
             @if(\App\PO::checkIfDelivered($poId) == '')
-            <a href="/ims/shipment/edit/{{$poId}}" class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Update Schedule</a>
+            <a href="{{env('APP_URL')}}/ims/shipment/edit/{{$poId}}" class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Update Schedule</a>
             @endif
         </div>   
     </div>

@@ -17,7 +17,7 @@
                 <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
-                <a href="/ims/purchasing">Purchasing</a>
+                <a href="{{env('APP_URL')}}/ims/purchasing">Purchasing</a>
             </li>
             <li class="active">Create PO</li>
         </ol>

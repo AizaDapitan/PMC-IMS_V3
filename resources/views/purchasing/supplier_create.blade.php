@@ -15,7 +15,7 @@
                 <a href="{{ route('ims.dashboard') }}">Dashboard</a>
             </li>
             <li>
-                <a href="/ims/purchasing">Purchasing</a>
+                <a href="{{env('APP_URL')}}/ims/purchasing">Purchasing</a>
             </li>
             <li class="active">Suppliers</li>
         </ol>
@@ -75,7 +75,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Address <i class="text-danger">*</i></label>
-                                        <textarea name="address" class="form-control input-lg" rows="3" required maxlength="50" placeholder="Address"></textarea>
+                                        <textarea name="address" class="form-control input-lg" rows="3" required maxlength="200" placeholder="Address"></textarea>
                                     </div>
                                 </div>
                             </div>
