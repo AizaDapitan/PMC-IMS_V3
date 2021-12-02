@@ -30,7 +30,7 @@ class AccountingController extends Controller
 
     public function index($param = null)
     {
-        $rolesPermissions = $this->roleRightService->hasPermissions("Users Maintenance");
+        $rolesPermissions = $this->roleRightService->hasPermissions("Payments");
 
         if (!$rolesPermissions['view']) {
             abort(401);

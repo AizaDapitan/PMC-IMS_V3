@@ -213,7 +213,7 @@ class ReportsController extends Controller
     // Overdue Payables
     public function overdue_payables(Request $request)
     {
-        $rolesPermissions = $this->roleRightService->hasPermissions("Overdue Payables");
+        $rolesPermissions = $this->roleRightService->hasPermissions("Overdue Payables Reports");
 
         if (!$rolesPermissions['view']) {
             abort(401);

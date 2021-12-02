@@ -31,7 +31,8 @@ class LoginController extends Controller
 
         $user_data = array(
             'domainAccount' => $request->get('domainAccount'),
-            'password'      => $request->get('password')
+            'password'      => $request->get('password'),
+            'isActive'      => 1
         );
     	if(Auth::attempt($user_data))
     	{	

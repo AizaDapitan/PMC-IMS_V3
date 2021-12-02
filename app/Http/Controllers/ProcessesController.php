@@ -207,7 +207,6 @@ class ProcessesController extends Controller
 
         $dir = '\\\\ftp\\FTP\\APP_UPLOADED_FILES\\ims\\' . $req->po . '\\po\\' . $req->fileName;
         $dst = storage_path() . '/app/public/' . $today . '/' . $req->fileName;
-
         copy($dir, $dst);
     }
 
@@ -221,7 +220,7 @@ class ProcessesController extends Controller
         }
 
         $dir = '\\\\ftp\\FTP\\APP_UPLOADED_FILES\\ims\\' . $req->po . '\\mcd\\' . $req->did . '\\' . $req->fileName;
-        $dst = storage_path() . '/app/public/' . $today . '/' . $req->fileName;
+        
 
         copy($dir, $dst);
     }

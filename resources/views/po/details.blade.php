@@ -425,7 +425,7 @@
 
             $.ajax({
                 type : 'post',
-                url  : '/copyFile',
+                url  : '{{env("APP_URL")}}/copyFile',
                 data : {
                     'po'        : p,
                     'fileName'  : f,
@@ -433,7 +433,7 @@
                 },
                 type : 'POST',
                 success : function (data) {
-                    window.open('{!!asset("storage/'+today+'/")!!}/'+f,"_blank")
+                    // window.open('{!!asset("storage/'+today+'/")!!}/'+f,"_blank")
                 }
             });
         }

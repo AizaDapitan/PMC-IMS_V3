@@ -413,7 +413,7 @@ class LogisticsController extends Controller
             }
         }
 
-        $mail->msgHTML(file_get_contents('http://172.16.20.27/ims_v3/email_sender.php?status=' . urlencode($status) . '&ponumber=' . urlencode($p->poNumber) . '&supplier=' . urlencode($p->supplier_name->name) . '&order_date=' . urlencode($p->orderDate) . '&rq_number=' . urlencode($p->rq) . '&rq_date=' . urlencode($p->rq_date) . '&expected_delivery=' . urlencode($l->expectedDeliveryDate) . '&po_id=' . urlencode($l->poId)), __DIR__);
+        $mail->msgHTML(file_get_contents(env('NATIVE_PHP_PATH').'email_sender.php?status=' . urlencode($status) . '&ponumber=' . urlencode($p->poNumber) . '&supplier=' . urlencode($p->supplier_name->name) . '&order_date=' . urlencode($p->orderDate) . '&rq_number=' . urlencode($p->rq) . '&rq_date=' . urlencode($p->rq_date) . '&expected_delivery=' . urlencode($l->expectedDeliveryDate) . '&po_id=' . urlencode($l->poId)), __DIR__);
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'PO# ' . $p->poNumber . ' (' . strtoupper($p->supplier_name->name) . ') Logistics Update';

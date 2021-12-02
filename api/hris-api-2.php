@@ -1,16 +1,17 @@
 <?php
 
 $conn_d['davao']['type'] = 'sqlsrv';
-$conn_d['davao']['host'] = '192.155.86.62';
-$conn_d['davao']['name'] = 'mssqlws1ph2_dimshris';
-$conn_d['davao']['uname'] = 'mssqlws1ph2_dimshriss';
-$conn_d['davao']['pword'] = '@Temp123!';
+$conn_d['davao']['host'] = 'LAPTOP-7B29UNBF\SQLEXPRESS';
+$conn_d['davao']['name'] = 'HRIS-DIMS';
+$conn_d['davao']['uname'] = 'sa';
+$conn_d['davao']['pword'] = 'sa';
 
 $conn_a['agusan']['type'] = 'sqlsrv';
-$conn_a['agusan']['host'] = '192.155.86.62';
-$conn_a['agusan']['name'] = 'mssqlws1ph2_dimshris';
-$conn_a['agusan']['uname'] = 'mssqlws1ph2_dimshriss';
-$conn_a['agusan']['pword'] = '@Temp123!';
+$conn_a['agusan']['host'] = 'LAPTOP-7B29UNBF\SQLEXPRESS';
+$conn_a['agusan']['name'] = 'HRIS-DIMS';
+$conn_a['agusan']['uname'] = 'sa';
+$conn_a['agusan']['pword'] = 'sa';
+
 
 $array_emp = array();
 
