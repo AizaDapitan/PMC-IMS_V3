@@ -39,7 +39,7 @@
                 </div>                
 
                 <div class="form-group">
-                    <label>Module <span class="required" aria-required="true"> * </span></label>
+                <label>Module <span class="required" aria-required="true"> * </span></label>
                     
                     <select required name="module_type" id="module_type" class="form-control"> 
                         @foreach($modules as $module)

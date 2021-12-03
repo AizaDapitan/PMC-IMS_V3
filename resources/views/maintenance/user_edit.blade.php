@@ -94,7 +94,7 @@
                                         <label>Role <i class="text-danger">*</i></label>
                                         <select name="role_id" id="role_id" class="form-control select2">
                                             @foreach($roles as $role)
-                                            <option value="{{ $role['id'] }}" {{ ($role['id'] == $user['roleid']) ? 'selected' : '' }}>{{ $role['name'] }}</option>
+                                            <option value="{{ $role['id'] }}" {{ ($role['id'] == $user['role_id']) ? 'selected' : '' }}>{{ $role['name'] }}</option>
                                             @endforeach
                                         </select>
                                     </div>
