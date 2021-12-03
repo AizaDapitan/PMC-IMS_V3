@@ -54,7 +54,7 @@
                     <input type="text" class="form-control" name="reason" id="reason" value="{{$application->reason}}" required maxlength="50"/>
                 </div>                
 
-                <a href="{{ route('maintenance.application.index') }}" class="btn btn-primary pull-left">Back </a>
+                <a href="{{ route('maintenance.application.index') }}" class="btn btn-primary pull-left">Cancel </a>
                 <button class="btn btn-primary pull-right"> Update </button>
 
             </form>

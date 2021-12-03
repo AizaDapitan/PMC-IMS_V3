@@ -206,6 +206,9 @@ class ProcessesController extends Controller
         }
 
         $dir = '\\\\ftp\\FTP\\APP_UPLOADED_FILES\\ims\\' . $req->po . '\\po\\' . $req->fileName;
+
+        
+        // $dir = 'D:\\uploaded files\\ims\\' . $req->po . '\\po\\' . $req->fileName;
         $dst = storage_path() . '/app/public/' . $today . '/' . $req->fileName;
         copy($dir, $dst);
     }
@@ -220,7 +223,7 @@ class ProcessesController extends Controller
         }
 
         $dir = '\\\\ftp\\FTP\\APP_UPLOADED_FILES\\ims\\' . $req->po . '\\mcd\\' . $req->did . '\\' . $req->fileName;
-        
+        $dst = storage_path() . '/app/public/' . $today . '/' . $req->fileName;
 
         copy($dir, $dst);
     }
@@ -230,7 +233,8 @@ class ProcessesController extends Controller
     {
         if (($req->has('uploadFile'))) {
             $files = $req->file('uploadFile');
-            $file_path = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\' . $req->po;
+             $file_path = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\' . $req->po;
+            // $file_path = 'D:\\uploaded files\\ims\\' . $req->po;
 
             if (!file_exists($file_path)) {
 
@@ -238,8 +242,12 @@ class ProcessesController extends Controller
                 mkdir($file_path . '\\po');
 
                 $destinationPath = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\' . $req->po . '\\po';
+                // $destinationPath = 'D:\\uploaded files\\ims\\' . $req->po . '\\po';
+
             } else {
                 $destinationPath = '\\\\ftp\FTP\APP_UPLOADED_FILES\ims\\' . $req->po . '\\po';
+                // $destinationPath = 'D:\\uploaded files\\ims\\' . $req->po . '\\po';
+
             }
 
             foreach ($files as $file) {

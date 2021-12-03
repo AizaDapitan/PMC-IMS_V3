@@ -323,7 +323,8 @@
                                                     @endphp
                                                             <tr>
                                                                 <td>
-                                                                    <a onclick="preview_po_file('{{$files[$i]}}','{{$po->poNumber}}');" href="#">{{$files[$i]}}</a>
+                                                                    <a onclick="preview_po_file('{{$files[$i]}}','{{$po->poNumber}}');" 
+                                                                    href="#">{{$files[$i]}}</a>
                                                                 </td>
                                                             </tr>
                                                     @php
@@ -433,7 +434,7 @@
                 },
                 type : 'POST',
                 success : function (data) {
-                    // window.open('{!!asset("storage/'+today+'/")!!}/'+f,"_blank")
+                    window.open('{!!asset("storage/'+today+'/")!!}/'+f,"_blank")
                 }
             });
         }
@@ -454,7 +455,7 @@
 
             $.ajax({
                 type : 'post',
-                url  : '/payment/preview-file',
+                url  : '{{env("APP_URL")}}/payment/preview-file',
                 data : {
                     'po'        : pn,
                     'pm'        : p,
@@ -479,7 +480,7 @@
 
             $.ajax({
                 type : 'post',
-                url  : '/drr/copyFile',
+                url  : '{{env("APP_URL")}}/drr/copyFile',
                 data : {
                     'po'        : pn,
                     'did'       : did,

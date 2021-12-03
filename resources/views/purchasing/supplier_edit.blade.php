@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <form autocomplete="off" action="/ims/supplier/update" method="POST">
+            <form autocomplete="off" action="{{ route('supplier.update') }}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{$supplier->id}}">
                 <div class="portlet light bordered">

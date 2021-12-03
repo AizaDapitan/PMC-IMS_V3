@@ -133,7 +133,7 @@
                         <div class="form-actions right">
                             <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</a>
                             <button type="submit" class="btn blue">
-                                <i class="fa fa-check"></i> Save</button>
+                                <i class="fa fa-check"></i> Update</button>
                         </div>
                     </form>
                 </div>

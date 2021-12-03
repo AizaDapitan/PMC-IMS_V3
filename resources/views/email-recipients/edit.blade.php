@@ -43,6 +43,7 @@
                     <input type="email" name="email" class="form-control" value="{{ $recipient->email }}" placeholder="Email">
                 </div>                
 
+                <a href="{{ route('email-recipients.index') }}" class="btn btn-primary pull-left">Cancel </a>
                 <button class="btn btn-primary pull-right"> Update </button>
 
             </form>

@@ -41,6 +41,7 @@
                     <input type="email" name="email" class="form-control" placeholder="Email">
                 </div>
 
+                <a href="{{ route('email-recipients.index') }}" class="btn btn-primary pull-left">Cancel </a>
                 <button class="btn btn-primary pull-right"> Create </button>
 
             </form>

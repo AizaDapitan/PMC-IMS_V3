@@ -52,7 +52,7 @@
                     <input type="description" name="description" class="form-control" required maxlength="50" placeholder="Description">
                 </div>
 
-                <a href="{{ route('permissions.index') }}" class="btn btn-primary pull-left">Back </a>
+                <a href="{{ route('permissions.index') }}" class="btn btn-primary pull-left">Cancel </a>
                 <button class="btn btn-primary pull-right"> Create </button>
 
             </form>

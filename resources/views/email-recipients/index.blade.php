@@ -95,14 +95,14 @@
         Swal.fire({
             title: "Are you sure?",
             text: 'This recipient will be removed permanently!',
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonText: "Remove",
             showCancelButton: true
         }).then(
         function(result) {
             if(result.isConfirmed){
                 $.ajax({
                     type: "DELETE",
-                    url: "/ims/email-recipients/"+id,
+                    url: "{{env('APP_URL')}}/ims/email-recipients/"+id,
                     data: {
                         '_token': $('meta[name="csrf-token"]').attr('content'),
                         'id':id

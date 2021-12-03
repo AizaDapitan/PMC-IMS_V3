@@ -75,7 +75,7 @@ Route::group(['middleware' => ['authenticated']], function () {
 	Route::post('/ims/supplier/store', 'PurchasingController@supplier_store')->name('supplier.store');
 
 	Route::get('/ims/supplier/edit/{id}', 'PurchasingController@supplier_edit');
-	Route::post('/ims/supplier/update', 'PurchasingController@supplier_update');
+	Route::post('/ims/supplier/update', 'PurchasingController@supplier_update')->name('supplier.update');
 
 	Route::get('/ims/purchasing/kpi', 'PurchasingController@kpi')->name('purchasing.kpi');
 

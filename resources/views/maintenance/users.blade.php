@@ -126,7 +126,7 @@
                                                     </div>
                                                     <div class="modal-body"> Are you sure you want to <b>Remove</b> this user? </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-circle dark btn-outline" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-circle dark btn-outline" data-dismiss="modal">Cancel</button>
                                                         <button type="submit" name="remove" class="btn btn-circle red"><span class="fa fa-trash"></span> Remove</button>
                                                     </div>
                                                 </div>
